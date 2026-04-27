@@ -45,6 +45,31 @@
         #scroll-progress { position: fixed; top: 0; left: 0; width: 100%; height: 5px; background: rgba(0,0,0,0.5); z-index: 999; }
         #progress-bar { height: 100%; background: var(--primary); width: 0%; transition: width 0.1s ease; box-shadow: 0 0 10px var(--accent); }
 
+        /* --- BOTÓN DE MÚSICA FLOTANTE --- */
+        .music-btn {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: var(--accent);
+            border: 3px solid #000;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            font-size: 1.2rem;
+            color: #000;
+            z-index: 1000;
+            cursor: pointer;
+            box-shadow: inset -3px -3px 0px rgba(0,0,0,0.2), 3px 3px 0px rgba(0,0,0,0.7);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: transform 0.1s;
+        }
+        .music-btn:active {
+            transform: translate(2px, 2px);
+            box-shadow: inset -1px -1px 0px rgba(0,0,0,0.2), 1px 1px 0px rgba(0,0,0,0.7);
+        }
+
         /* --- FONDO ESTRELLAS --- */
         .stars-container { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none; }
         .star { position: absolute; background: white; border-radius: 50%; opacity: 0.3; animation: twinkle var(--duration) infinite ease-in-out; }
@@ -110,7 +135,7 @@
             z-index: 2; 
         }
 
-        /* ==================== LETRERO BOWSER JR ==================== */
+        /* ==================== LETRERO BOWSER JR CON ANIMACIÓN ==================== */
         .bowser-date-wrapper { 
             padding: 1rem 0; 
             display: flex; 
@@ -131,11 +156,18 @@
             padding-left: 25px; 
         }
 
+        /* Animación suave para todo el contenedor de Bowser */
         .bowser-container {
             position: relative;
             width: 100%;
             max-width: 550px; 
+            animation: float-bowser 4s ease-in-out infinite alternate;
         }
+        @keyframes float-bowser {
+            0% { transform: translateY(0px); }
+            100% { transform: translateY(-15px); }
+        }
+
         .bowser-img {
             width: 100%;
             height: auto;
@@ -203,7 +235,6 @@
         /* --- PERSONAJES Y ANIMACIONES --- */
         .character-sprite { position: absolute; opacity: 0; z-index: 1; transition: opacity 0.8s ease, transform 0.8s cubic-bezier(0.34, 1.56, 0.64, 1); pointer-events: none; }
         .character-sprite img { width: 100%; height: auto; display: block; filter: drop-shadow(0 5px 15px rgba(0,0,0,0.5)); animation: floating 3s ease-in-out infinite alternate; }
-        @keyframes floating { 0% { transform: translateY(0px); } 100% { transform: translateY(-12px); } }
 
         .sprite-mario-giro { top: 30px; left: -160px; width: 100px; transform: rotate(-10deg); z-index: 1; }
         .sprite-mario-giro.visible { opacity: 1; left: -10px; transform: rotate(0deg); }
@@ -216,6 +247,14 @@
     </style>
 </head>
 <body>
+
+    <audio id="bg-music" loop>
+        <source src="sonido mario.mp3" type="audio/mpeg">
+    </audio>
+
+    <button id="music-btn" class="music-btn">
+        <i class="fa-solid fa-volume-xmark" id="music-icon"></i>
+    </button>
 
     <div id="scroll-progress"><div id="progress-bar"></div></div>
     <div class="stars-container" id="stars-js"></div>
@@ -367,14 +406,51 @@
     </div>
 
     <script>
+        // --- CONTROL DE MÚSICA DE FONDO ---
+        const bgMusic = document.getElementById('bg-music');
+        const musicBtn = document.getElementById('music-btn');
+        const musicIcon = document.getElementById('music-icon');
+        let isMusicPlaying = false;
+
+        function toggleMusic() {
+            if (isMusicPlaying) {
+                bgMusic.pause();
+                musicIcon.className = 'fa-solid fa-volume-xmark';
+            } else {
+                bgMusic.play();
+                musicIcon.className = 'fa-solid fa-music';
+            }
+            isMusicPlaying = !isMusicPlaying;
+        }
+
+        // Reproducir o pausar al tocar el botón flotante
+        musicBtn.addEventListener('click', function(e) {
+            e.stopPropagation(); // Evita que el click se propague al body
+            toggleMusic();
+        });
+
+        // Intentar reproducir al primer toque/clic en cualquier parte de la pantalla (Workaround para Autoplay)
+        document.body.addEventListener('click', function() {
+            if (!isMusicPlaying) {
+                toggleMusic();
+            }
+        }, { once: true });
+        
+        // También intentar activar al hacer scroll
+        window.addEventListener('scroll', function() {
+            if (!isMusicPlaying) {
+                toggleMusic();
+            }
+        }, { once: true });
+
+
         // --- BARRA DE PROGRESO ---
-        window.onscroll = function() { moveProgressBar() };
-        function moveProgressBar() {
+        window.addEventListener('scroll', function() {
             var winScroll = document.body.scrollTop || document.documentElement.scrollTop;
             var height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
             var scrolled = (winScroll / height) * 100;
             document.getElementById("progress-bar").style.width = scrolled + "%";
-        }
+        });
 
         // --- ESTRELLAS ---
         const starsContainer = document.getElementById('stars-js');
