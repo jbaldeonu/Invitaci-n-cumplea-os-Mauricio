@@ -6,7 +6,7 @@
     
     <title>Invitación de Cumpleaños - Mauricio</title>
     <meta property="og:title" content="¡Estás Invitado! 🥳" />
-    <meta property="og:description" content="Acompáñame a celebrar el cumpleaños de Mauricio. ¡Te espero con mucha emoción!" />
+    <meta property="og:description" content="Hola!! Te invito a mi fiesta de cumpleaños. Abre la invitación donde encontrarás todo el detalle. ¡Te espero!" />
     <meta property="og:image" content="https://jbaldeonu.github.io/Invitaci-n-cumplea-os-Mauricio/portada.jpeg" />
     <meta property="og:url" content="https://jbaldeonu.github.io/Invitaci-n-cumplea-os-Mauricio/" />
     <meta property="og:type" content="website" />
@@ -133,16 +133,39 @@
         .btn-calendar { background-color: var(--primary); }
         .btn-icon { font-size: 1.4rem; margin-right: 15px; filter: drop-shadow(2px 2px 0px rgba(0,0,0,0.5));}
 
-        /* --- PERSONAJES Y ANIMACIONES --- */
-        .character-sprite { position: absolute; opacity: 0; z-index: 1; transition: opacity 0.8s ease, transform 0.8s cubic-bezier(0.34, 1.56, 0.64, 1); pointer-events: none; }
-        .character-sprite img { width: 100%; height: auto; display: block; filter: drop-shadow(0 5px 15px rgba(0,0,0,0.5)); animation: floating 3s ease-in-out infinite alternate; }
+        /* ==================== PERSONAJES Y ANIMACIONES (RESTAURADO) ==================== */
+        .character-sprite { 
+            position: absolute; 
+            opacity: 0; 
+            z-index: 1; 
+            transition: opacity 0.8s ease, transform 0.8s cubic-bezier(0.34, 1.56, 0.64, 1); 
+            pointer-events: none; 
+        }
+        
+        .character-sprite img { 
+            width: 100%; 
+            height: auto; 
+            display: block; 
+            filter: drop-shadow(0 5px 15px rgba(0,0,0,0.5)); 
+            /* Animación de flotación agregada aquí */
+            animation: floating 3s ease-in-out infinite alternate; 
+        }
+
+        /* Keyframes para el movimiento suave hacia arriba y abajo */
+        @keyframes floating { 
+            0% { transform: translateY(0px); } 
+            100% { transform: translateY(-15px); } 
+        }
 
         .sprite-mario-giro { top: 30px; left: -160px; width: 100px; transform: rotate(-10deg); z-index: 1; }
         .sprite-mario-giro.visible { opacity: 1; left: -10px; transform: rotate(0deg); }
+        
         .sprite-mario-salto { bottom: -20px; right: -160px; width: 100px; z-index: 1; }
         .sprite-mario-salto.visible { opacity: 1; right: -40px; } 
+        
         .sprite-luigi { top: 150px; left: -160px; width: 90px; z-index: 1; }
         .sprite-luigi.visible { opacity: 1; left: 15px; }
+        
         .sprite-yoshi { bottom: 30px; right: -160px; width: 120px; transform: scaleX(-1); z-index: 1; }
         .sprite-yoshi.visible { opacity: 1; right: 10px; }
     </style>
@@ -173,12 +196,10 @@
                 No quiero que falte nadie de los que más quiero, ¡y por eso tienes que venir tú! Ven a ayudarme a soplar las velitas, ¡te espero con mucha emoción!"
             </p>
             <p class="signature golden-glow">Con cariño Mauricio</p>
-            
         </div>
 
         <div class="bowser-date-wrapper reveal">
             <span class="fecha-title-top silver-glow">Fecha:</span>
-            
             <div class="bowser-container">
                 <img src="bowser fecha.png" alt="Fecha Bowser" class="bowser-img">
                 <div class="bowser-text">
@@ -200,7 +221,7 @@
                     <i class="fa-solid fa-location-dot detail-icon"></i>
                     <div class="detail-content">
                         <strong>Lugar</strong>
-                        Av. las torres 316 - Ate <br>Condominio residencial Prados del Sol
+                        Av. las torres 316 - Ate - Lima <br>Condominio Prados del Sol - Local Sumaq 3er piso.
                     </div>
                 </div>
             </div>
@@ -300,7 +321,7 @@
                 <i class="fa-solid fa-location-dot btn-icon"></i> Ver Ubicación
             </a>
 
-            <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Cumplea%C3%B1os+de+Mauricio&dates=20260502T200000Z/20260502T230000Z&details=Festejo+de+cumplea%C3%B1os&location=Av.+las+torres+316+-+Ate,+Condominio+residencial+Prados+del+Sol" target="_blank" class="btn btn-calendar">
+            <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Cumplea%C3%B1os+de+Mauricio&dates=20260502T200000Z/20260502T230000Z&details=Festejo+de+cumplea%C3%B1os&location=Av.+las+torres+316+-+Ate+-+Lima,+Condominio+Prados+del+Sol+-+Local+Sumaq+3er+piso" target="_blank" class="btn btn-calendar">
                 <i class="fa-regular fa-calendar-plus btn-icon"></i> Agendar en Calendario
             </a>
         </div>
