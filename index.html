@@ -66,37 +66,66 @@
         .message { font-size: 1.2rem; line-height: 1.7; font-style: italic; text-shadow: 0 2px 4px rgba(0,0,0,0.5); position: relative; z-index: 2; }
         .signature { font-weight: bold; font-size: 1.4rem; color: var(--accent); margin-top: 10px; position: relative; z-index: 2; }
 
-        /* ==================== LETRERO BOWSER JR ==================== */
-        .bowser-date-wrapper { padding: 1rem 0; display: flex; justify-content: center; position: relative; z-index: 2; }
-        .bowser-container { position: relative; width: 100%; max-width: 500px; /* Tamaño grande de Bowser */ }
-        .bowser-img { width: 100%; height: auto; display: block; filter: drop-shadow(0 15px 25px rgba(0,0,0,0.6)); }
-        
-        .bowser-text {
-            position: absolute;
-            top: 46.5%; left: 63%;
-            transform: translate(-50%, -50%);
-            width: 70%;
-            text-align: center;
-            display: flex; flex-direction: column; align-items: center;
-        }
-
-        .golden-text {
-            display: block;
-            font-family: var(--script-text);
-            font-weight: bold;
+        /* ==================== ESTILO DORADO RESPLANDECIENTE ==================== */
+        .golden-glow {
             background: linear-gradient(to bottom right, #bf953f, #fcf6ba, #b38728, #fbf5b7, #aa771c);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             filter: drop-shadow(0px 2px 2px rgba(0,0,0,0.4));
             animation: brillo-escarcha 2s infinite alternate ease-in-out;
+            font-family: var(--script-text);
         }
         @keyframes brillo-escarcha {
             0% { filter: drop-shadow(0px 2px 2px rgba(0,0,0,0.4)) brightness(1); }
             100% { filter: drop-shadow(0px 0px 8px rgba(255, 215, 0, 0.8)) brightness(1.3); }
         }
 
-        .fecha-title { font-size: 1.3rem; margin-bottom: 2px; }
-        .fecha-date { font-size: 1.5rem; white-space: nowrap; line-height: 1; }
+        /* ==================== LETRERO BOWSER JR ==================== */
+        .bowser-date-wrapper { 
+            padding: 1rem 0; 
+            display: flex; 
+            flex-direction: column; /* Para apilar Fecha y Bowser */
+            align-items: center; 
+            position: relative; 
+            z-index: 2; 
+        }
+        
+        /* Título "Fecha:" fuera de la imagen */
+        .fecha-title-top {
+            font-size: 2.8rem;
+            margin-bottom: -15px; /* Lo acerca a la imagen */
+            z-index: 3;
+            font-weight: bold;
+        }
+
+        .bowser-container {
+            position: relative;
+            width: 100%;
+            max-width: 550px; 
+        }
+        .bowser-img {
+            width: 100%;
+            height: auto;
+            display: block;
+            filter: drop-shadow(0 15px 25px rgba(0,0,0,0.6));
+        }
+        
+        /* Texto dentro de la pizarra */
+        .bowser-text {
+            position: absolute;
+            top: 46%;  
+            left: 62.5%; 
+            transform: translate(-50%, -50%);
+            width: 78%; 
+            text-align: center;
+        }
+        
+        /* Texto "Sábado 02 de Mayo" más grande y en una línea */
+        .fecha-date-board {
+            font-size: 1.7rem; 
+            font-weight: bold;
+            white-space: nowrap; 
+        }
 
         /* --- CUADRO DE DATOS RESTANTE (HORA Y LUGAR) --- */
         .details-wrapper { padding: 0rem 2rem 1rem; position: relative; z-index: 2; }
@@ -128,15 +157,38 @@
         .timeline-row.alt-right .col-right { align-items: flex-start; padding-left: 25px; text-align: left; }
         .timeline-row.alt-right .col-left { visibility: hidden; }
         .dot-center { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); width: 14px; height: 14px; background-color: var(--accent); border-radius: 50%; border: 2px solid #fff; box-shadow: 0 0 10px var(--accent); z-index: 3; }
-        
         .time-text { font-family: var(--time-text); font-weight: 700; color: var(--accent); font-size: 1.05rem; display: block; margin-bottom: 4px; position: relative; z-index: 15;}
         .desc-text { font-family: var(--script-text); font-size: 1.5rem; color: white; display: block; line-height: 1.1; position: relative; z-index: 15;}
 
-        /* --- BOTONES --- */
-        .action-buttons { padding: 2rem; display: flex; flex-direction: column; gap: 1.3rem; align-items: center; position: relative; z-index: 2;}
-        .btn { display: flex; align-items: center; justify-content: center; width: 100%; max-width: 340px; text-decoration: none; padding: 1.25rem; border-radius: 50px; font-weight: bold; font-size: 1.1rem; color: var(--white); text-transform: uppercase; transition: 0.3s; }
-        .btn-whatsapp { background-color: var(--whatsapp); box-shadow: 0 4px 15px rgba(37, 211, 102, 0.4); }
-        .btn-location { background-color: var(--secondary); box-shadow: 0 4px 15px rgba(4, 156, 216, 0.4); }
+        /* ==================== BOTONES RETRO ACTUALIZADOS ==================== */
+        .action-buttons { padding: 2rem; display: flex; flex-direction: column; gap: 1.5rem; align-items: center; position: relative; z-index: 2;}
+        .btn { 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; /* Alinea contenido al centro */
+            width: 100%; 
+            max-width: 320px; 
+            text-decoration: none; 
+            padding: 1.2rem; 
+            border-radius: 8px; /* Borde más cuadrado tipo consola */
+            border: 4px solid #000; /* Borde grueso pixel art */
+            font-family: var(--game-text);
+            font-size: 0.65rem; /* Letra pequeña para fuente ancha Arcade */
+            line-height: 1.4;
+            color: var(--white); 
+            text-transform: uppercase; 
+            transition: transform 0.1s, box-shadow 0.1s; 
+            /* Sombra interna y externa para efecto Botón 3D Retro */
+            box-shadow: inset -4px -4px 0px rgba(0,0,0,0.2), 4px 4px 0px rgba(0,0,0,0.7);
+        }
+        .btn:active { 
+            transform: translate(4px, 4px); /* Botón hundido al presionar */
+            box-shadow: inset -2px -2px 0px rgba(0,0,0,0.2), 0px 0px 0px rgba(0,0,0,0.7); 
+        }
+        .btn-whatsapp { background-color: var(--whatsapp); }
+        .btn-location { background-color: var(--secondary); }
+        .btn-calendar { background-color: var(--primary); }
+        .btn-icon { font-size: 1.4rem; margin-right: 15px; filter: drop-shadow(2px 2px 0px rgba(0,0,0,0.5));}
 
         /* ==================== PERSONAJES Y ANIMACIONES ==================== */
         .character-sprite { position: absolute; opacity: 0; z-index: 1; transition: opacity 0.8s ease, transform 0.8s cubic-bezier(0.34, 1.56, 0.64, 1); pointer-events: none; }
@@ -173,11 +225,12 @@
         </div>
 
         <div class="bowser-date-wrapper reveal">
+            <span class="fecha-title-top golden-glow">Fecha:</span>
+            
             <div class="bowser-container">
                 <img src="bowser fecha.png" alt="Fecha Bowser" class="bowser-img">
                 <div class="bowser-text">
-                    <span class="fecha-title golden-text">Fecha:</span>
-                    <span class="fecha-date golden-text">Sábado 02 de mayo</span>
+                    <span class="fecha-date-board golden-glow">Sábado 02 de mayo</span>
                 </div>
             </div>
         </div>
@@ -287,8 +340,17 @@
         </div>
 
         <div class="action-buttons reveal">
-            <a href="https://wa.me/51986057910?text=¡Hola!%20Confirmo%20mi%20asistencia%20al%20cumpleaños%20de%20Mauricio%20🥳" target="_blank" class="btn btn-whatsapp">Confirmar Asistencia</a>
-            <a href="https://www.google.com/maps/place/Condominio+Prados+del+Sol/@-12.0169662,-76.9007077,17z/data=!3m1!4b1!4m6!3m5!1s0x9105c3dd9f0ba7a5:0x34fc1e14a42c44d1!8m2!3d-12.0169662!4d-76.8981328!16s%2Fg%2F11h1l1dc0y?entry=ttu&g_ep=EgoyMDI2MDQyMi4wIKXMDSoASAFQAw%3D%3D" target="_blank" class="btn btn-location">Ver Ubicación</a>
+            <a href="https://wa.me/51986057910?text=¡Hola!%20Confirmo%20mi%20asistencia%20al%20cumpleaños%20de%20Mauricio%20🥳" target="_blank" class="btn btn-whatsapp">
+                <i class="fa-brands fa-whatsapp btn-icon"></i> Confirmar Asistencia
+            </a>
+            
+            <a href="https://www.google.com/maps/place/Condominio+Prados+del+Sol/@-12.0169662,-76.9007077,17z/data=!3m1!4b1!4m6!3m5!1s0x9105c3dd9f0ba7a5:0x34fc1e14a42c44d1!8m2!3d-12.0169662!4d-76.8981328!16s%2Fg%2F11h1l1dc0y?entry=ttu&g_ep=EgoyMDI2MDQyMi4wIKXMDSoASAFQAw%3D%3D" target="_blank" class="btn btn-location">
+                <i class="fa-solid fa-location-dot btn-icon"></i> Ver Ubicación
+            </a>
+
+            <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Cumplea%C3%B1os+de+Mauricio&dates=20260502T200000Z/20260502T230000Z&details=Festejo+de+cumplea%C3%B1os&location=Av.+las+torres+316+-+Ate,+Condominio+residencial+Prados+del+Sol" target="_blank" class="btn btn-calendar">
+                <i class="fa-solid fa-calendar-plus btn-icon"></i> Agendar en Calendario
+            </a>
         </div>
     </div>
 
