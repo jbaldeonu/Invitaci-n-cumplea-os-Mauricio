@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Invitación de Cumpleaños - Mauricio</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Montserrat:wght@700&family=Press+Start+2P&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --primary: #E52521;      
+            --secondary: #049CD8;    
+            --accent: #FBD000;       
+            --bg-galaxy-deep: #01040a; 
+            --bg-galaxy-mid: #0d1b3e;  
+            --text-main: #ffffff;    
+            --text-muted: #d1d5db;   
+            --white: #ffffff;
+            --whatsapp: #25D366;     
+            --script-text: 'Caveat', cursive; 
+            --time-text: 'Montserrat', sans-serif; 
+            --game-text: 'Press Start 2P', system-ui; 
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        
+        body { 
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; 
+            background: radial-gradient(circle at top, var(--bg-galaxy-mid) 0%, var(--bg-galaxy-deep) 100%);
+            color: var(--text-main); 
+            display: flex; 
+            justify-content: center; 
+            min-height: 100vh;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* Estrellas animadas del fondo */
+        body::after {
+            content: ""; position: absolute; top: 0; left: 0; width: 2px; height: 2px; background: transparent;
+            box-shadow: 
+                10vw 10vh #fff, 25vw 50vh 1px #fff, 80vw 20vh #fff, 40vw 80vh 1px #fff, 
+                90vw 70vh #fff, 15vw 90vh #fff, 60vw 40vh 1px #fff, 30vw 30vh #fff,
+                75vw 85vh 1px #fff, 5vw 45vh #fff, 50vw 15vh #fff, 95vw 55vh 1px #fff,
+                20vw 60vh #fff, 70vw 95vh #fff, 35vw 05vh 1px #fff, 85vw 35vh #fff,
+                55vw 65vh #fff, 02vw 75vh 1px #fff, 45vw 25vh #fff, 65vw 02vh 1px #fff;
+            animation: twinkle_small 4s infinite; z-index: 0;
+        }
+        body::before {
+            content: ""; position: absolute; top: 0; left: 0; width: 3px; height: 3px; background: transparent;
+            box-shadow: 5vw 20vh var(--accent), 95vw 80vh 2px #fff, 45vw 50vh var(--accent), 15vw 10vh 2px #fff, 65vw 70vh var(--accent), 35vw 90vh 2px #fff;
+            animation: twinkle_large 6s infinite; z-index: 0;
+        }
+        @keyframes twinkle_small { 0%, 100% { opacity: 0.3; } 50% { opacity: 0.8; } }
+        @keyframes twinkle_large { 0%, 100% { opacity: 0.5; transform: scale(1); } 50% { opacity: 1; transform: scale(1.2); } }
+
+        .invitation-container { max-width: 480px; width: 100%; background-color: transparent; min-height: 100vh; position: relative; z-index: 1; padding-bottom: 4rem; overflow: hidden; }
+
+        .hero-image { width: 100%; height: 350px; background-image: url('https://images.unsplash.com/photo-1530103862676-de88b6b08fd3?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'); background-size: cover; background-position: center; border-bottom: 5px solid var(--accent); box-shadow: 0 10px 30px rgba(4, 156, 216, 0.3); }
+
+        .message-section { padding: 3.5rem 2rem 2.5rem; text-align: center; position: relative; }
+        .message { font-size: 1.2rem; line-height: 1.7; font-style: italic; margin-bottom: 1rem; text-shadow: 0 2px 4px rgba(0,0,0,0.5); position: relative; z-index: 2; }
+        .signature { font-weight: bold; font-size: 1.4rem; color: var(--accent); text-shadow: 0 2px 4px rgba(0,0,0,0.5); position: relative; z-index: 2; }
+
+        .details-wrapper { padding: 1rem 2rem; position: relative; z-index: 2; }
+        .details-card { background-color: rgba(255, 255, 255, 0.05); backdrop-filter: blur(5px); border-radius: 16px; padding: 2rem; border: 1px solid rgba(209, 213, 221, 0.3); box-shadow: 0 15px 35px rgba(0,0,0,0.3); position: relative; overflow: hidden; }
+        .details-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.6) 50%, transparent 100%); }
+        .detail-row { display: flex; align-items: flex-start; margin-bottom: 1.5rem; text-align: left; }
+        .detail-row:last-child { margin-bottom: 0; }
+        .detail-icon { color: var(--accent); font-size: 1.3rem; min-width: 35px; margin-top: 2px; filter: drop-shadow(0 0 3px rgba(251, 208, 0, 0.5)); }
+        .detail-content { font-size: 1.05rem; line-height: 1.5; }
+        .detail-content strong { display: block; font-size: 0.85rem; text-transform: uppercase; color: var(--text-muted); letter-spacing: 1px; margin-bottom: 3px; }
+
+        .countdown-wrapper { background-color: rgba(0,0,0,0.7); padding: 2rem 1rem; margin: 2rem; text-align: center; border: 3px solid #fff; border-radius: 8px; box-shadow: 0 0 20px rgba(255,255,255,0.2); position: relative; z-index: 2;}
+        .countdown-title { font-family: var(--game-text); font-size: 0.8rem; margin-bottom: 1.8rem; text-transform: uppercase; line-height: 1.6; text-shadow: 0 0 5px rgba(255,255,255,0.5); display: flex; align-items: center; justify-content: center; gap: 12px; }
+        .countdown { display: flex; justify-content: center; gap: 0.8rem; flex-wrap: wrap; }
+        .time-box { background-color: var(--accent); padding: 0.9rem 0.3rem; border-radius: 4px; min-width: 72px; border: 3px solid #000; box-shadow: inset -4px -4px 0px rgba(0, 0, 0, 0.15), 3px 3px 0px rgba(0,0,0,0.5); }
+        .time-box span { font-family: var(--game-text); font-size: 1.2rem; color: #000; margin-bottom: 8px; display: block; }
+        .time-box small { font-family: var(--time-text); font-size: 0.65rem; font-weight: 800; color: #000; text-transform: uppercase; letter-spacing: 0.5px; }
+
+        .itinerary-section { padding: 3rem 1rem; text-align: center; position: relative; z-index: 2;}
+        .itinerary-title { font-family: var(--script-text); font-size: 3.2rem; margin-bottom: 4rem; text-shadow: 0 2px 10px rgba(255,255,255,0.3); }
+        .timeline-container { position: relative; max-width: 400px; margin: 0 auto; }
+        .timeline-line { position: absolute; top: 10px; bottom: 10px; left: 50%; width: 2px; background: linear-gradient(to bottom, transparent, var(--accent), transparent); transform: translateX(-50%); z-index: 1; }
+        .timeline-row { display: flex; width: 100%; margin-bottom: 3.8rem; position: relative; z-index: 2; }
+        .col-left, .col-right { width: 50%; display: flex; align-items: center; }
+        .col-left { justify-content: flex-end; padding-right: 25px; }
+        .col-right { justify-content: flex-start; padding-left: 25px; }
+        .empty-col { visibility: hidden; } 
+        .dot-center { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); width: 14px; height: 14px; background-color: var(--accent); border-radius: 50%; border: 2px solid #fff; box-shadow: 0 0 10px var(--accent); }
+        .content-box { display: flex; align-items: center; gap: 15px; }
+        .text-wrapper { text-align: center; }
+        .time-text { font-family: var(--time-text); font-weight: 700; color: var(--accent); font-size: 1.05rem; margin-bottom: 0.3rem; }
+        .desc-text { font-family: var(--script-text); font-size: 1.5rem; line-height: 1.1; letter-spacing: 0.5px; }
+        .fa-icon { font-size: 1.6rem; filter: drop-shadow(0 0 5px rgba(255,255,255,0.5)); }
+
+        .action-buttons { padding: 2rem; display: flex; flex-direction: column; gap: 1.3rem; align-items: center; position: relative; z-index: 2;}
+        .btn { display: flex; align-items: center; justify-content: center; width: 100%; max-width: 340px; text-decoration: none; padding: 1.25rem; border-radius: 50px; font-weight: bold; font-size: 1.1rem; color: var(--white); text-transform: uppercase; transition: transform 0.2s; overflow: hidden; }
+        .btn-whatsapp { background-color: var(--whatsapp); box-shadow: 0 4px 15px rgba(37, 211, 102, 0.4); }
+        .btn-location { background-color: var(--secondary); box-shadow: 0 4px 15px rgba(4, 156, 216, 0.4); }
+        .btn-icon { width: 22px; height: 22px; margin-right: 12px; fill: currentColor; }
+
+        /* ANIMACIONES DE TUS PERSONAJES */
+        .character-sprite { position: absolute; opacity: 0; z-index: 1; transition: all 1s cubic-bezier(0.34, 1.56, 0.64, 1); max-width: 150px; height: auto; filter: drop-shadow(0 5px 15px rgba(0,0,0,0.5)); }
+        
+        .sprite-mario-giro { top: -20px; left: -160px; width: 140px; transform: rotate(-10deg) scale(0.8); }
+        .sprite-mario-giro.visible { opacity: 1; left: -10px; transform: rotate(0deg) scale(1); }
+
+        .sprite-mario-salto { bottom: -30px; right: -160px; width: 120px; }
+        .sprite-mario-salto.visible { opacity: 1; right: 10px; }
+
+        .sprite-luigi { top: 20px; left: -160px; width: 110px; }
+        .sprite-luigi.visible { opacity: 1; left: 10px; }
+
+        .sprite-yoshi { bottom: 50px; right: -160px; width: 130px; transform: scaleX(-1); }
+        .sprite-yoshi.visible { opacity: 1; right: 10px; }
+    </style>
+</head>
+<body>
+
+    <div class="invitation-container">
+        <div class="hero-image"></div>
+
+        <div class="message-section scroll-trigger">
+            <img src="mario-giro.png" alt="Mario Giro" class="character-sprite sprite-mario-giro">
+            
+            <p class="message">"¡Hola! Te invito a mi fiesta. 🎂<br><br>No quiero que falte nadie de los que más quiero, ¡y por eso tienes que venir tú! Ven a ayudarme a soplar las velitas, ¡te espero con mucha emoción!"</p>
+            <p class="signature">- Atte: Mauricio</p>
+        </div>
+
+        <div class="details-wrapper">
+            <div class="details-card">
+                <div class="detail-row"><i class="fa-regular fa-calendar-days detail-icon"></i><div class="detail-content"><strong>Fecha</strong>Sábado 02 de Mayo 2026</div></div>
+                <div class="detail-row"><i class="fa-regular fa-clock detail-icon"></i><div class="detail-content"><strong>Hora</strong>03:00 pm</div></div>
+                <div class="detail-row"><i class="fa-solid fa-location-dot detail-icon"></i><div class="detail-content"><strong>Lugar</strong>Av. las torres 316 - Ate <br>Condominio residencial Prados del Sol</div></div>
+            </div>
+        </div>
+
+        <div class="countdown-wrapper scroll-trigger">
+            <img src="mario-salto.png" alt="Mario Salto" class="character-sprite sprite-mario-salto">
+            
+            <div class="countdown-title"><i class="fa-solid fa-star" style="color: var(--accent);"></i> Level Start In <i class="fa-solid fa-star" style="color: var(--accent);"></i></div>
+            <div class="countdown" id="countdown">
+                <div class="time-box"><span id="days">00</span><small>Días</small></div>
+                <div class="time-box"><span id="hours">00</span><small>Hrs</small></div>
+                <div class="time-box"><span id="minutes">00</span><small>Min</small></div>
+                <div class="time-box"><span id="seconds">00</span><small>Seg</small></div>
+            </div>
+        </div>
+
+        <div class="itinerary-section scroll-trigger">
+             <img src="luigi.png" alt="Luigi" class="character-sprite sprite-luigi">
+             <img src="yoshi.png" alt="Yoshi" class="character-sprite sprite-yoshi">
+             
+            <h2 class="itinerary-title">Itinerario</h2>
+            <div class="timeline-container">
+                <div class="timeline-line"></div>
+                <div class="timeline-row"><div class="col-left"><div class="content-box"><i class="fa-solid fa-star fa-icon" style="color: var(--accent);"></i><div class="text-wrapper"><div class="time-text">03:00 pm</div><div class="desc-text">Empieza la fiesta</div></div></div></div><div class="dot-center"></div><div class="col-right empty-col"></div></div>
+                <div class="timeline-row"><div class="col-left empty-col"></div><div class="dot-center"></div><div class="col-right"><div class="content-box"><div class="text-wrapper"><div class="time-text">04:00 pm</div><div class="desc-text">CARITAS PINTADAS</div></div><i class="fa-solid fa-palette fa-icon" style="color: var(--secondary);"></i></div></div></div>
+                <div class="timeline-row"><div class="col-left"><div class="content-box"><i class="fa-solid fa-gamepad fa-icon" style="color: var(--primary);"></i><div class="text-wrapper"><div class="time-text">05:00 pm</div><div class="desc-text">SHOW INFANTIL MARIO BROS</div></div></div></div><div class="dot-center"></div><div class="col-right empty-col"></div></div>
+                <div class="timeline-row"><div class="col-left empty-col"></div><div class="dot-center"></div><div class="col-right"><div class="content-box"><div class="text-wrapper"><div class="time-text">05:30 pm</div><div class="desc-text">HORA LOCA</div></div><i class="fa-solid fa-music fa-icon" style="color: var(--primary);"></i></div></div></div>
+                <div class="timeline-row"><div class="col-left"><div class="content-box"><i class="fa-solid fa-hammer fa-icon"></i><div class="text-wrapper"><div class="time-text">06:00 pm</div><div class="desc-text">ROMPE LA PIÑATA</div></div></div></div><div class="dot-center"></div><div class="col-right empty-col"></div></div>
+                <div class="timeline-row"><div class="col-left empty-col"></div><div class="dot-center"></div><div class="col-right"><div class="content-box"><div class="text-wrapper"><div class="time-text">06:30 pm</div><div class="desc-text">FELIZ CUMPLEAÑOS !!!</div></div><i class="fa-solid fa-cake-candles fa-icon" style="color: var(--primary);"></i></div></div></div>
+                <div class="timeline-row"><div class="col-left"><div class="content-box"><i class="fa-solid fa-moon fa-icon" style="color: var(--secondary);"></i><div class="text-wrapper"><div class="time-text">07:00 pm</div><div class="desc-text">FIN DEL EVENTO 😴</div></div></div></div><div class="dot-center"></div><div class="col-right empty-col"></div></div>
+            </div>
+        </div>
+
+        <div class="action-buttons">
+            <a href="https://wa.me/51986057910?text=¡Hola!%20Confirmo%20mi%20asistencia%20al%20cumpleaños%20de%20Mauricio%20🥳" target="_blank" class="btn btn-whatsapp"><svg class="btn-icon" viewBox="0 0 24 24"><path d="M12.031 0C5.385 0 0 5.388 0 12.035c0 2.124.553 4.195 1.604 6.015L.194 24l6.108-1.599A11.967 11.967 0 0012.031 24c6.646 0 12.031-5.388 12.031-12.035S18.677 0 12.031 0zm0 22.012c-1.802 0-3.567-.484-5.116-1.401l-.367-.217-3.793.993.993-3.793-.217-.367c-.917-1.549-1.401-3.314-1.401-5.116 0-5.55 4.512-10.063 10.062-10.063 5.55 0 10.063 4.513 10.063 10.063 0 5.551-4.513 10.063-10.063 10.063zm5.523-7.533c-.303-.152-1.791-.884-2.064-.985-.272-.101-.47-.152-.668.152-.198.303-.779.985-.953 1.187-.174.202-.348.227-.651.076-1.551-.777-2.73-1.637-3.757-3.376-.202-.343-.025-.528.126-.679.136-.136.303-.353.454-.529.152-.177.202-.303.303-.505.101-.202.051-.379-.025-.53-.076-.152-.668-1.611-.915-2.205-.241-.579-.485-.501-.668-.51-.174-.008-.374-.008-.571-.008-.198 0-.521.074-.794.377-.272.303-1.04 1.017-1.04 2.478 0 1.461 1.065 2.873 1.213 3.076.148.202 2.096 3.197 5.076 4.484.709.307 1.263.491 1.696.628.712.226 1.36.194 1.872.118.572-.085 1.791-.731 2.043-1.438.253-.707.253-1.314.177-1.438-.076-.124-.274-.198-.577-.35z"/></svg>Confirmar Asistencia</a>
+            <a href="https://www.google.com/maps/place/Condominio+Prados+del+Sol/@-12.0169662,-76.9007077,17z/data=!3m1!4b1!4m6!3m5!1s0x9105c3dd9f0ba7a5:0x34fc1e14a42c44d1!8m2!3d-12.0169662!4d-76.8981328!16s%2Fg%2F11h1l1dc0y?entry=ttu&g_ep=EgoyMDI2MDQyMi4wIKXMDSoASAFQAw%3D%3D" target="_blank" class="btn btn-location"><svg class="btn-icon" viewBox="0 0 24 24"><path d="M12 0C7.58 0 4 3.58 4 8c0 5.25 8 16 8 16s8-10.75 8-16c0-4.42-3.58-8-8-8zm0 11.5c-1.93 0-3.5-1.57-3.5-3.5S10.07 4.5 12 4.5s3.5 1.57 3.5 3.5-1.57 3.5-3.5 3.5z"/></svg>Ver Ubicación</a>
+        </div>
+    </div>
+
+    <script>
+        const countDownDate = new Date("May 2, 2026 15:00:00").getTime();
+        const countdownInterval = setInterval(function() {
+            const now = new Date().getTime();
+            const distance = countDownDate - now;
+
+            if (distance < 0) {
+                clearInterval(countdownInterval);
+                document.getElementById("countdown").innerHTML = "<div style='font-family: \"Press Start 2P\", system-ui; font-size: 1rem; color: #FBD000; padding: 1.5rem 0; text-shadow: 0 0 10px rgba(251,208,0,0.7); line-height: 1.5;'>¡LEVEL<br>START!</div>";
+                return;
+            }
+
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            document.getElementById("days").innerText = days < 10 ? '0' + days : days;
+            document.getElementById("hours").innerText = hours < 10 ? '0' + hours : hours;
+            document.getElementById("minutes").innerText = minutes < 10 ? '0' + minutes : minutes;
+            document.getElementById("seconds").innerText = seconds < 10 ? '0' + seconds : seconds;
+        }, 1000);
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const triggers = document.querySelectorAll('.scroll-trigger');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const sprites = entry.target.querySelectorAll('.character-sprite');
+                        sprites.forEach(sprite => sprite.classList.add('visible'));
+                    }
+                });
+            }, { threshold: 0.3 });
+            triggers.forEach(trigger => observer.observe(trigger));
+        });
+    </script>
+</body>
+</html>
