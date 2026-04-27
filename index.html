@@ -66,27 +66,57 @@
         .message { font-size: 1.2rem; line-height: 1.7; font-style: italic; text-shadow: 0 2px 4px rgba(0,0,0,0.5); position: relative; z-index: 2; }
         .signature { font-weight: bold; font-size: 1.4rem; color: var(--accent); margin-top: 10px; position: relative; z-index: 2; }
 
-        /* ==================== CUBO DE FECHA RETRO (NUEVO) ==================== */
-        .date-box-wrapper { padding: 1rem 2rem; position: relative; z-index: 2; display: flex; justify-content: center;}
-        .date-cube { 
-            width: 250px; height: 150px; 
-            background-color: var(--accent); 
-            border-radius: 8px; 
-            border: 4px solid #000;
-            box-shadow: 
-                inset -5px -5px 0px rgba(229, 37, 33, 0.3), /* Sombra interna roja */
-                inset 5px 5px 0px rgba(255,255,255,0.5), /* Brillo interno blanco */
-                0 10px 20px rgba(0,0,0,0.5); /* Sombra externa */
-            display: flex; flex-direction: column; align-items: center; justify-content: center;
-            position: relative; overflow: hidden;
+        /* ==================== LETRERO BOWSER JR (NUEVO) ==================== */
+        .bowser-date-wrapper { 
+            padding: 1rem; 
+            display: flex; 
+            justify-content: center; 
+            position: relative; 
+            z-index: 2; 
         }
-        /* Pequeños brillos pixelados */
-        .date-cube::before, .date-cube::after { content: '?'; position: absolute; font-family: var(--game-text); color: rgba(0,0,0,0.2); font-size: 4rem; z-index: 1;}
-        .date-cube::before { top: -10px; left: 10px; }
-        .date-cube::after { bottom: -10px; right: 10px; }
-        
-        .block-label { font-family: var(--game-text); font-size: 0.8rem; color: #000; text-transform: uppercase; margin-bottom: 12px; position: relative; z-index: 2; }
-        .block-date { font-family: var(--game-text); font-size: 0.9rem; color: #000; line-height: 1.6; position: relative; z-index: 2; text-align: center;}
+        .bowser-container {
+            position: relative;
+            width: 100%;
+            max-width: 400px; /* Tamaño ideal para móvil */
+        }
+        .bowser-img {
+            width: 100%;
+            height: auto;
+            display: block;
+            filter: drop-shadow(0 15px 25px rgba(0,0,0,0.6)); /* Sombra para que resalte sobre el fondo */
+        }
+        .bowser-text {
+            position: absolute;
+            top: 46%;  /* Ajuste vertical sobre la pizarra en blanco */
+            left: 63%; /* Ajuste horizontal hacia la derecha de Bowser */
+            transform: translate(-50%, -50%);
+            width: 55%;
+            text-align: center;
+        }
+        .fecha-title {
+            display: block;
+            font-family: var(--script-text);
+            font-size: 1.3rem;
+            color: #614013; /* Color oscuro para el subtítulo */
+            margin-bottom: 2px;
+        }
+        .fecha-date {
+            display: block;
+            font-family: var(--script-text);
+            font-size: 1.7rem;
+            font-weight: bold;
+            line-height: 1;
+            /* Efecto Dorado Escarcha */
+            background: linear-gradient(to bottom right, #bf953f, #fcf6ba, #b38728, #fbf5b7, #aa771c);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            filter: drop-shadow(0px 2px 2px rgba(0,0,0,0.4));
+            animation: brillo-escarcha 2s infinite alternate ease-in-out;
+        }
+        @keyframes brillo-escarcha {
+            0% { filter: drop-shadow(0px 2px 2px rgba(0,0,0,0.4)) brightness(1); }
+            100% { filter: drop-shadow(0px 0px 8px rgba(255, 215, 0, 0.8)) brightness(1.3); }
+        }
 
         /* --- CUADRO DE DATOS RESTANTE (HORA Y LUGAR) --- */
         .details-wrapper { padding: 0rem 2rem 1rem; position: relative; z-index: 2; }
@@ -99,9 +129,9 @@
         .detail-content strong { display: block; font-size: 0.8rem; text-transform: uppercase; color: var(--text-muted); letter-spacing: 1px; margin-bottom: 2px; }
 
         /* --- CONTADOR --- */
-        .countdown-wrapper { background-color: rgba(0,0,0,0.7); padding: 2rem 1rem; margin: 2rem; text-align: center; border: 3px solid #fff; border-radius: 8px; box-shadow: 0 0 20px rgba(255,255,255,0.2); position: relative; z-index: 2;}
-        .countdown-title { font-family: var(--game-text); font-size: 0.75rem; margin-bottom: 1.2rem; text-transform: uppercase; text-shadow: 0 0 5px rgba(255,255,255,0.5); display: flex; align-items: center; justify-content: center; gap: 8px; }
-        .countdown { display: flex; justify-content: center; gap: 0.5rem; flex-wrap: wrap; }
+        .countdown-wrapper { background-color: rgba(0,0,0,0.7); padding: 1.5rem 1rem; margin: 2rem auto 2rem 1.5rem; max-width: 320px; text-align: left; border: 3px solid #fff; border-radius: 8px; box-shadow: 0 0 20px rgba(255,255,255,0.2); position: relative; z-index: 2;}
+        .countdown-title { font-family: var(--game-text); font-size: 0.75rem; margin-bottom: 1.2rem; text-transform: uppercase; text-shadow: 0 0 5px rgba(255,255,255,0.5); display: flex; align-items: center; justify-content: flex-start; gap: 8px; }
+        .countdown { display: flex; justify-content: flex-start; gap: 0.5rem; flex-wrap: wrap; }
         .time-box { background-color: var(--accent); padding: 0.6rem 0.2rem; border-radius: 4px; min-width: 55px; border: 2px solid #000; box-shadow: inset -3px -3px 0px rgba(0, 0, 0, 0.15), 2px 2px 0px rgba(0,0,0,0.5); }
         .time-box span { font-family: var(--game-text); font-size: 1rem; color: #000; display: block; margin-bottom: 5px; text-align: center;}
         .time-box small { font-family: var(--time-text); font-size: 0.55rem; font-weight: 800; color: #000; text-transform: uppercase; text-align: center; display: block;}
@@ -118,6 +148,7 @@
         .timeline-row.alt-right .col-right { align-items: flex-start; padding-left: 25px; text-align: left; }
         .timeline-row.alt-right .col-left { visibility: hidden; }
         .dot-center { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); width: 14px; height: 14px; background-color: var(--accent); border-radius: 50%; border: 2px solid #fff; box-shadow: 0 0 10px var(--accent); z-index: 3; }
+        
         .time-text { font-family: var(--time-text); font-weight: 700; color: var(--accent); font-size: 1.05rem; display: block; margin-bottom: 4px; position: relative; z-index: 15;}
         .desc-text { font-family: var(--script-text); font-size: 1.5rem; color: white; display: block; line-height: 1.1; position: relative; z-index: 15;}
 
@@ -132,19 +163,15 @@
         .character-sprite img { width: 100%; height: auto; display: block; filter: drop-shadow(0 5px 15px rgba(0,0,0,0.5)); animation: floating 3s ease-in-out infinite alternate; }
         @keyframes floating { 0% { transform: translateY(0px); } 100% { transform: translateY(-12px); } }
 
-        /* Mario Giro */
         .sprite-mario-giro { top: 30px; left: -160px; width: 100px; transform: rotate(-10deg); z-index: 1; }
         .sprite-mario-giro.visible { opacity: 1; left: -10px; transform: rotate(0deg); }
         
-        /* Mario Salto: MOVIDO MÁS A LA DERECHA PARA NO TAPAR SEGUNDERO */
         .sprite-mario-salto { bottom: -20px; right: -160px; width: 100px; z-index: 1; }
-        .sprite-mario-salto.visible { opacity: 1; right: -40px; } /* Ajustado para estar fuera de las cajas */
+        .sprite-mario-salto.visible { opacity: 1; right: -40px; } 
         
-        /* Luigi: DETRÁS del texto */
         .sprite-luigi { top: 150px; left: -160px; width: 90px; z-index: 1; }
         .sprite-luigi.visible { opacity: 1; left: 15px; }
         
-        /* Yoshi */
         .sprite-yoshi { bottom: 30px; right: -160px; width: 120px; transform: scaleX(-1); z-index: 1; }
         .sprite-yoshi.visible { opacity: 1; right: 10px; }
     </style>
@@ -165,10 +192,13 @@
             <p class="signature">- Atte: Mauricio</p>
         </div>
 
-        <div class="date-box-wrapper reveal">
-            <div class="date-cube">
-                <span class="block-label">Fecha</span>
-                <span class="block-date">Sábado<br>02 Mayo<br>2026</span>
+        <div class="bowser-date-wrapper reveal">
+            <div class="bowser-container">
+                <img src="bowser fecha.png" alt="Fecha Bowser" class="bowser-img">
+                <div class="bowser-text">
+                    <span class="fecha-title">Fecha:</span>
+                    <span class="fecha-date">Sábado 02<br>de Mayo</span>
+                </div>
             </div>
         </div>
 
@@ -320,7 +350,7 @@
             document.getElementById("seconds").innerText = Math.floor((d % (1000 * 60)) / 1000).toString().padStart(2, '0');
         }, 1000);
 
-        // --- SCROLL REVEAL (BIDIRECCIONAL) ---
+        // --- SCROLL REVEAL ---
         const observerOptions = { threshold: 0.15 };
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
