@@ -61,34 +61,51 @@
         .reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.8s ease, transform 0.8s ease; }
         .reveal.visible { opacity: 1; transform: translateY(0); }
 
-        /* ==================== ESTILO DORADO RESPLANDECIENTE ==================== */
+        /* ==================== EFECTOS DE TEXTO (DORADO Y PLATA) ==================== */
         .golden-glow {
             background: linear-gradient(to bottom right, #bf953f, #fcf6ba, #b38728, #fbf5b7, #aa771c);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             filter: drop-shadow(0px 2px 2px rgba(0,0,0,0.4));
             animation: brillo-escarcha 2s infinite alternate ease-in-out;
+            font-family: var(--script-text);
         }
         @keyframes brillo-escarcha {
             0% { filter: drop-shadow(0px 2px 2px rgba(0,0,0,0.4)) brightness(1); }
             100% { filter: drop-shadow(0px 0px 8px rgba(255, 215, 0, 0.8)) brightness(1.3); }
         }
 
+        .silver-glow {
+            background: linear-gradient(to bottom right, #cccccc, #ffffff, #e6e6e6, #ffffff, #b3b3b3);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            filter: drop-shadow(0px 2px 2px rgba(0,0,0,0.6));
+            animation: brillo-plata 2s infinite alternate ease-in-out;
+            font-family: var(--script-text);
+        }
+        @keyframes brillo-plata {
+            0% { filter: drop-shadow(0px 2px 2px rgba(0,0,0,0.6)) brightness(1); }
+            100% { filter: drop-shadow(0px 0px 10px rgba(220, 230, 255, 0.9)) brightness(1.3); }
+        }
+
         /* --- MENSAJE --- */
         .message-section { padding: 3.5rem 2rem 2.5rem; text-align: center; position: relative; }
         .message { 
-            font-size: 1.25rem; 
-            line-height: 1.6; 
-            font-style: italic; 
-            font-weight: bold; /* Grosor extra para que el dorado se vea bien */
+            font-family: var(--script-text); /* Mismo tipo de letra que la firma */
+            font-size: 2rem; /* Más grande por ser cursiva */
+            line-height: 1.3; 
+            font-weight: bold; 
             position: relative; 
             z-index: 2; 
         }
         .signature { 
             font-family: var(--script-text);
             font-weight: bold; 
-            font-size: 1.1rem; /* Más pequeño según indicación */
+            font-size: 1.3rem; /* Más pequeño */
             margin-top: 15px; 
+            text-align: right; /* Alineado a la derecha */
+            display: block;
+            width: 100%;
             position: relative; 
             z-index: 2; 
         }
@@ -103,12 +120,16 @@
             z-index: 2; 
         }
         
+        /* Título "Fecha:" alineado a la izquierda */
         .fecha-title-top {
-            font-family: var(--script-text);
             font-size: 2.8rem;
             margin-bottom: -15px; 
             z-index: 3;
             font-weight: bold;
+            width: 100%;
+            max-width: 500px;
+            text-align: left;
+            padding-left: 25px; /* Separación del borde izquierdo */
         }
 
         .bowser-container {
@@ -125,16 +146,16 @@
         
         .bowser-text {
             position: absolute;
-            top: 46%;  
-            left: 62.5%; 
+            top: 38%;  /* Subido más arriba (antes 46%) */
+            left: 63%; 
             transform: translate(-50%, -50%);
-            width: 78%; 
+            width: 75%; 
             text-align: center;
         }
         
+        /* Texto "Sábado 02 de Mayo" en Plata, una línea y agrandado */
         .fecha-date-board {
-            font-family: var(--script-text);
-            font-size: 1.7rem; 
+            font-size: 2.1rem; /* Mucho más grande */
             font-weight: bold;
             white-space: nowrap; 
         }
@@ -174,14 +195,7 @@
 
         /* --- BOTONES ARCADE --- */
         .action-buttons { padding: 2rem; display: flex; flex-direction: column; gap: 1.5rem; align-items: center; position: relative; z-index: 2;}
-        .btn { 
-            display: flex; align-items: center; justify-content: center; 
-            width: 100%; max-width: 320px; text-decoration: none; padding: 1.2rem; 
-            border-radius: 8px; border: 4px solid #000; 
-            font-family: var(--game-text); font-size: 0.65rem; line-height: 1.4; color: var(--white); 
-            text-transform: uppercase; transition: transform 0.1s, box-shadow 0.1s; 
-            box-shadow: inset -4px -4px 0px rgba(0,0,0,0.2), 4px 4px 0px rgba(0,0,0,0.7);
-        }
+        .btn { display: flex; align-items: center; justify-content: center; width: 100%; max-width: 320px; text-decoration: none; padding: 1.2rem; border-radius: 8px; border: 4px solid #000; font-family: var(--game-text); font-size: 0.65rem; line-height: 1.4; color: var(--white); text-transform: uppercase; transition: transform 0.1s, box-shadow 0.1s; box-shadow: inset -4px -4px 0px rgba(0,0,0,0.2), 4px 4px 0px rgba(0,0,0,0.7); }
         .btn:active { transform: translate(4px, 4px); box-shadow: inset -2px -2px 0px rgba(0,0,0,0.2), 0px 0px 0px rgba(0,0,0,0.7); }
         .btn-whatsapp { background-color: var(--whatsapp); }
         .btn-location { background-color: var(--secondary); }
@@ -195,13 +209,10 @@
 
         .sprite-mario-giro { top: 30px; left: -160px; width: 100px; transform: rotate(-10deg); z-index: 1; }
         .sprite-mario-giro.visible { opacity: 1; left: -10px; transform: rotate(0deg); }
-        
         .sprite-mario-salto { bottom: -20px; right: -160px; width: 100px; z-index: 1; }
         .sprite-mario-salto.visible { opacity: 1; right: -40px; } 
-        
         .sprite-luigi { top: 150px; left: -160px; width: 90px; z-index: 1; }
         .sprite-luigi.visible { opacity: 1; left: 15px; }
-        
         .sprite-yoshi { bottom: 30px; right: -160px; width: 120px; transform: scaleX(-1); z-index: 1; }
         .sprite-yoshi.visible { opacity: 1; right: 10px; }
     </style>
@@ -223,16 +234,17 @@
                 "¡Hola! Te invito a mi fiesta. 🎂<br><br>
                 No quiero que falte nadie de los que más quiero, ¡y por eso tienes que venir tú! Ven a ayudarme a soplar las velitas, ¡te espero con mucha emoción!"
             </p>
-            <p class="signature golden-glow">- Con cariño Mauricio</p>
+            <p class="signature golden-glow">Con cariño Mauricio</p>
             
         </div>
 
         <div class="bowser-date-wrapper reveal">
-            <span class="fecha-title-top golden-glow">Fecha:</span>
+            <span class="fecha-title-top silver-glow">Fecha:</span>
+            
             <div class="bowser-container">
                 <img src="bowser fecha.png" alt="Fecha Bowser" class="bowser-img">
                 <div class="bowser-text">
-                    <span class="fecha-date-board golden-glow">Sábado 02 de mayo</span>
+                    <span class="fecha-date-board silver-glow">Sábado 02 de mayo</span>
                 </div>
             </div>
         </div>
