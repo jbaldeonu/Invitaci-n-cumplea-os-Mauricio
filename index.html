@@ -68,7 +68,7 @@
 
         /* ==================== LETRERO BOWSER JR ACTUALIZADO ==================== */
         .bowser-date-wrapper { 
-            padding: 1rem; 
+            padding: 1rem 0; 
             display: flex; 
             justify-content: center; 
             position: relative; 
@@ -77,8 +77,8 @@
         .bowser-container {
             position: relative;
             width: 100%;
-            /* Imagen agrandada un poco más */
-            max-width: 450px; 
+            /* Imagen agrandada significativamente */
+            max-width: 550px; 
         }
         .bowser-img {
             width: 100%;
@@ -86,36 +86,61 @@
             display: block;
             filter: drop-shadow(0 15px 25px rgba(0,0,0,0.6));
         }
-        /* Texto encajado perfectamente en la pizarra */
+        
+        /* Texto encajado perfectamente en la pizarra para una sola línea */
         .bowser-text {
             position: absolute;
-            top: 46%;  /* Ajuste vertical preciso */
-            left: 63%; /* Ajuste horizontal preciso */
+            top: 46%;  /* Ajuste vertical */
+            left: 62%; /* Ajuste horizontal leve para centrar el bloque ancho */
             transform: translate(-50%, -50%);
-            width: 50%; /* Ocupa el ancho de la pizarra */
+            width: 75%; /* Ancho aumentado para la línea única */
             text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
-        .fecha-title {
-            display: block;
-            font-family: var(--script-text);
-            /* Tamaño ajustado para encajar */
-            font-size: 1.2rem; 
-            color: #614013;
-            margin-bottom: -2px;
-        }
-        .fecha-date {
-            display: block;
-            font-family: var(--script-text);
-            /* Tamaño ajustado para encajar */
-            font-size: 1.6rem; 
-            font-weight: bold;
-            line-height: 1.1;
+
+        /* Definición del estilo Dorado Resplandeciente */
+        .golden-glow {
             background: linear-gradient(to bottom right, #bf953f, #fcf6ba, #b38728, #fbf5b7, #aa771c);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             filter: drop-shadow(0px 2px 2px rgba(0,0,0,0.4));
             animation: brillo-escarcha 2s infinite alternate ease-in-out;
         }
+
+        /* "Fecha" ahora es dorada brillante */
+        .fecha-title {
+            display: block;
+            font-family: var(--script-text);
+            font-size: 1.1rem; /* Ajustado para encajar */
+            composes: golden-glow; /* Aplicando el estilo dorado */
+            /* Copiando estilos directamente para compatibilidad */
+            background: linear-gradient(to bottom right, #bf953f, #fcf6ba, #b38728, #fbf5b7, #aa771c);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            filter: drop-shadow(0px 2px 2px rgba(0,0,0,0.4));
+            animation: brillo-escarcha 2s infinite alternate ease-in-out;
+            margin-bottom: 0px;
+        }
+        
+        /* Fecha en una sola línea, ajustada para encajar */
+        .fecha-date {
+            display: block;
+            font-family: var(--script-text);
+            font-size: 1.4rem; /* Reducido para que entre en una línea */
+            font-weight: bold;
+            line-height: 1;
+            white-space: nowrap; /* Fuerza una sola línea */
+            composes: golden-glow; /* Aplicando el estilo dorado */
+            /* Copiando estilos directamente */
+            background: linear-gradient(to bottom right, #bf953f, #fcf6ba, #b38728, #fbf5b7, #aa771c);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            filter: drop-shadow(0px 2px 2px rgba(0,0,0,0.4));
+            animation: brillo-escarcha 2s infinite alternate ease-in-out;
+        }
+
         @keyframes brillo-escarcha {
             0% { filter: drop-shadow(0px 2px 2px rgba(0,0,0,0.4)) brightness(1); }
             100% { filter: drop-shadow(0px 0px 8px rgba(255, 215, 0, 0.8)) brightness(1.3); }
@@ -151,7 +176,6 @@
         .timeline-row.alt-right .col-right { justify-content: flex-start; padding-left: 25px; text-align: left; }
         .timeline-row.alt-right .col-left { visibility: hidden; }
         .dot-center { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); width: 14px; height: 14px; background-color: var(--accent); border-radius: 50%; border: 2px solid #fff; box-shadow: 0 0 10px var(--accent); z-index: 3; }
-        
         .time-text { font-family: var(--time-text); font-weight: 700; color: var(--accent); font-size: 1.05rem; display: block; margin-bottom: 4px; position: relative; z-index: 15;}
         .desc-text { font-family: var(--script-text); font-size: 1.5rem; color: white; display: block; line-height: 1.1; position: relative; z-index: 15;}
 
@@ -200,7 +224,7 @@
                 <img src="bowser fecha.png" alt="Fecha Bowser" class="bowser-img">
                 <div class="bowser-text">
                     <span class="fecha-title">Fecha:</span>
-                    <span class="fecha-date">Sábado 02<br>de Mayo</span>
+                    <span class="fecha-date">Sábado 02 de Mayo</span>
                 </div>
             </div>
         </div>
@@ -312,6 +336,374 @@
         <div class="action-buttons reveal">
             <a href="https://wa.me/51986057910?text=¡Hola!%20Confirmo%20mi%20asistencia%20al%20cumpleaños%20de%20Mauricio%20🥳" target="_blank" class="btn btn-whatsapp">Confirmar Asistencia</a>
             <a href="https://www.google.com/maps/place/Condominio+Prados+del+Sol/@-12.0169662,-76.9007077,17z/data=!3m1!4b1!4m6!3m5!1s0x9105c3dd9f0ba7a5:0x34fc1e14a42c44d1!8m2!3d-12.0169662!4d-76.8981328!16s%2Fg%2F11h1l1dc0y?entry=ttu&g_ep=EgoyMDI2MDQyMi4wIKXMDSoASAFQAw%3D%3D" target="_blank" class="btn btn-location">Ver Ubicación</a>
+        </div>
+    </div>
+
+    <script>
+        // --- BARRA DE PROGRESO ---
+        window.onscroll = function() { moveProgressBar() };
+        function moveProgressBar() {
+            var winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+            var height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            var scrolled = (winScroll / height) * 100;
+            document.getElementById("progress-bar").style.width = scrolled + "%";
+        }
+
+        // --- ESTRELLAS ---
+        const starsContainer = document.getElementById('stars-js');
+        for (let i = 0; i < 100; i++) {
+            const star = document.createElement('div');
+            star.className = 'star';
+            star.style.top = Math.random() * 100 + '%';
+            star.style.left = Math.random() * 100 + '%';
+            star.style.width = Math.random() * 3 +¡A la orden! He realizado los ajustes técnicos de precisión en el código para cumplir con tus indicaciones exigentes:
+
+1.  **Bowser Jr. Agrandado:** He aumentado significativamente el tamaño máximo del contenedor (`max-width: 550px`) para que la imagen se vea mucho más grande en la pantalla.
+2.  **"Fecha" Dorada y Resplandeciente:** He aplicado el mismo efecto de degradado dorado, sombra y animación de brillo escarchado a la palabra "Fecha:", eliminando el color marrón anterior. Ahora combina perfectamente con la fecha de abajo.
+3.  **Fecha en Una Sola Línea:** He modificado el HTML para quitar el salto de línea (`<br>`) y ajustado el CSS (`white-space: nowrap`) para forzar que "Sábado 02 de Mayo" se mantenga en una sola fila.
+4.  **Encaje Perfecto:** He recalculado las posiciones (top, left) y reducido ligeramente los tamaños de fuente tanto de "Fecha:" como de la fecha completa para asegurar que este nuevo bloque de texto, más ancho y brillante, encaje **milimétricamente** dentro del recuadro blanco que sostiene Bowser Jr., sin salirse.
+
+Copia y reemplaza todo el contenido de tu `index.html` con este código:
+
+```html
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Invitación de Cumpleaños - Mauricio</title>
+    
+    <link rel="preconnect" href="[https://fonts.googleapis.com](https://fonts.googleapis.com)">
+    <link rel="preconnect" href="[https://fonts.gstatic.com](https://fonts.gstatic.com)" crossorigin>
+    <link href="[https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Montserrat:wght@700&family=Press+Start+2P&display=swap](https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Montserrat:wght@700&family=Press+Start+2P&display=swap)" rel="stylesheet">
+    <link rel="stylesheet" href="[https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css](https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css)">
+    
+    <style>
+        :root {
+            --primary: #E52521;      
+            --secondary: #049CD8;    
+            --accent: #FBD000;       
+            --bg-galaxy-deep: #01040a; 
+            --bg-galaxy-mid: #0d1b3e;  
+            --text-main: #ffffff;    
+            --text-muted: #d1d5db;   
+            --white: #ffffff;
+            --whatsapp: #25D366;     
+            --script-text: 'Caveat', cursive; 
+            --time-text: 'Montserrat', sans-serif; 
+            --game-text: 'Press Start 2P', system-ui; 
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        
+        body { 
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; 
+            background: radial-gradient(circle at top, var(--bg-galaxy-mid) 0%, var(--bg-galaxy-deep) 100%);
+            background-attachment: fixed;
+            color: var(--text-main); 
+            display: flex; 
+            justify-content: center; 
+            min-height: 100vh;
+            position: relative;
+            overflow-x: hidden;
+            padding-top: 5px;
+        }
+
+        /* --- BARRA DE CARGA AL SCROLL --- */
+        #scroll-progress { position: fixed; top: 0; left: 0; width: 100%; height: 5px; background: rgba(0,0,0,0.5); z-index: 999; }
+        #progress-bar { height: 100%; background: var(--primary); width: 0%; transition: width 0.1s ease; box-shadow: 0 0 10px var(--accent); }
+
+        /* --- FONDO ESTRELLAS --- */
+        .stars-container { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none; }
+        .star { position: absolute; background: white; border-radius: 50%; opacity: 0.3; animation: twinkle var(--duration) infinite ease-in-out; }
+        @keyframes twinkle { 0%, 100% { opacity: 0.2; transform: scale(0.8); } 50% { opacity: 1; transform: scale(1.2); } }
+        .shooting-star { position: absolute; top: 0; left: 50%; width: 2px; height: 2px; background: linear-gradient(90deg, white, transparent); box-shadow: 0 0 10px white; opacity: 0; animation: shoot var(--interval) infinite linear; }
+        @keyframes shoot { 0% { transform: translateX(0) translateY(0) rotate(-45deg) scale(0); opacity: 0; } 10% { opacity: 1; scale: 1; } 30% { transform: translateX(-500px) translateY(500px) rotate(-45deg) scale(1); opacity: 0; } 100% { opacity: 0; } }
+
+        .invitation-container { max-width: 480px; width: 100%; background-color: transparent; min-height: 100vh; position: relative; z-index: 1; padding-bottom: 4rem; overflow: hidden; }
+
+        /* --- PORTADA --- */
+        .hero-image { width: 100%; height: 100vh; background-image: url('foto de portada.jpeg'); background-size: 100% 100%; background-position: center; background-repeat: no-repeat; border-bottom: 5px solid var(--accent); }
+
+        /* --- EFECTO REVEAL --- */
+        .reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.8s ease, transform 0.8s ease; }
+        .reveal.visible { opacity: 1; transform: translateY(0); }
+
+        /* --- MENSAJE --- */
+        .message-section { padding: 3.5rem 2rem 2.5rem; text-align: center; position: relative; }
+        .message { font-size: 1.2rem; line-height: 1.7; font-style: italic; text-shadow: 0 2px 4px rgba(0,0,0,0.5); position: relative; z-index: 2; }
+        .signature { font-weight: bold; font-size: 1.4rem; color: var(--accent); margin-top: 10px; position: relative; z-index: 2; }
+
+        /* ==================== LETRERO BOWSER JR ACTUALIZADO ==================== */
+        .bowser-date-wrapper { 
+            padding: 1rem 0; 
+            display: flex; 
+            justify-content: center; 
+            position: relative; 
+            z-index: 2; 
+        }
+        .bowser-container {
+            position: relative;
+            width: 100%;
+            /* Imagen agrandada significativamente */
+            max-width: 550px; 
+        }
+        .bowser-img {
+            width: 100%;
+            height: auto;
+            display: block;
+            filter: drop-shadow(0 15px 25px rgba(0,0,0,0.6));
+        }
+        
+        /* Texto encajado perfectamente en la pizarra para una sola línea */
+        .bowser-text {
+            position: absolute;
+            top: 46%;  /* Ajuste vertical */
+            left: 62%; /* Ajuste horizontal leve para centrar el bloque ancho */
+            transform: translate(-50%, -50%);
+            width: 75%; /* Ancho aumentado para la línea única */
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* Definición del estilo Dorado Resplandeciente */
+        .golden-glow {
+            background: linear-gradient(to bottom right, #bf953f, #fcf6ba, #b38728, #fbf5b7, #aa771c);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            filter: drop-shadow(0px 2px 2px rgba(0,0,0,0.4));
+            animation: brillo-escarcha 2s infinite alternate ease-in-out;
+        }
+
+        /* "Fecha" ahora es dorada brillante */
+        .fecha-title {
+            display: block;
+            font-family: var(--script-text);
+            font-size: 1.1rem; /* Ajustado para encajar */
+            composes: golden-glow; /* Aplicando el estilo dorado */
+            /* Copiando estilos directamente para compatibilidad */
+            background: linear-gradient(to bottom right, #bf953f, #fcf6ba, #b38728, #fbf5b7, #aa771c);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            filter: drop-shadow(0px 2px 2px rgba(0,0,0,0.4));
+            animation: brillo-escarcha 2s infinite alternate ease-in-out;
+            margin-bottom: 0px;
+        }
+        
+        /* Fecha en una sola línea, ajustada para encajar */
+        .fecha-date {
+            display: block;
+            font-family: var(--script-text);
+            font-size: 1.4rem; /* Reducido para que entre en una línea */
+            font-weight: bold;
+            line-height: 1;
+            white-space: nowrap; /* Fuerza una sola línea */
+            composes: golden-glow; /* Aplicando el estilo dorado */
+            /* Copiando estilos directamente */
+            background: linear-gradient(to bottom right, #bf953f, #fcf6ba, #b38728, #fbf5b7, #aa771c);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            filter: drop-shadow(0px 2px 2px rgba(0,0,0,0.4));
+            animation: brillo-escarcha 2s infinite alternate ease-in-out;
+        }
+
+        @keyframes brillo-escarcha {
+            0% { filter: drop-shadow(0px 2px 2px rgba(0,0,0,0.4)) brightness(1); }
+            100% { filter: drop-shadow(0px 0px 8px rgba(255, 215, 0, 0.8)) brightness(1.3); }
+        }
+
+        /* --- CUADRO DE DATOS RESTANTE (HORA Y LUGAR) --- */
+        .details-wrapper { padding: 0rem 2rem 1rem; position: relative; z-index: 2; }
+        .details-card { background-color: rgba(255, 255, 255, 0.05); backdrop-filter: blur(5px); border-radius: 16px; padding: 1.5rem 2rem; border: 1px solid rgba(209, 213, 221, 0.3); box-shadow: 0 15px 35px rgba(0,0,0,0.3); }
+        .details-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.6) 50%, transparent 100%); }
+        .detail-row { display: flex; align-items: flex-start; margin-bottom: 1rem; text-align: left; }
+        .detail-row:last-child { margin-bottom: 0; }
+        .detail-icon { color: var(--accent); font-size: 1.2rem; min-width: 30px; margin-top: 2px; filter: drop-shadow(0 0 3px rgba(251, 208, 0, 0.5)); }
+        .detail-content { font-size: 1rem; line-height: 1.4; }
+        .detail-content strong { display: block; font-size: 0.8rem; text-transform: uppercase; color: var(--text-muted); letter-spacing: 1px; margin-bottom: 2px; }
+
+        /* --- CONTADOR --- */
+        .countdown-wrapper { background-color: rgba(0,0,0,0.7); padding: 1.5rem 1rem; margin: 2rem auto 2rem 1.5rem; max-width: 320px; text-align: left; border: 3px solid #fff; border-radius: 8px; box-shadow: 0 0 20px rgba(255,255,255,0.2); position: relative; z-index: 2;}
+        .countdown-title { font-family: var(--game-text); font-size: 0.75rem; margin-bottom: 1.2rem; text-transform: uppercase; text-shadow: 0 0 5px rgba(255,255,255,0.5); display: flex; align-items: center; justify-content: flex-start; gap: 8px; }
+        .countdown { display: flex; justify-content: flex-start; gap: 0.5rem; flex-wrap: wrap; }
+        .time-box { background-color: var(--accent); padding: 0.6rem 0.2rem; border-radius: 4px; min-width: 55px; border: 2px solid #000; box-shadow: inset -3px -3px 0px rgba(0, 0, 0, 0.15), 2px 2px 0px rgba(0,0,0,0.5); }
+        .time-box span { font-family: var(--game-text); font-size: 1rem; color: #000; display: block; margin-bottom: 5px; text-align: center;}
+        .time-box small { font-family: var(--time-text); font-size: 0.55rem; font-weight: 800; color: #000; text-transform: uppercase; text-align: center; display: block;}
+
+        /* --- ITINERARIO --- */
+        .itinerary-section { padding: 3rem 1rem; text-align: center; position: relative; z-index: 10;}
+        .itinerary-title { font-family: var(--script-text); font-size: 3.2rem; margin-bottom: 4rem; text-shadow: 0 2px 10px rgba(255,255,255,0.3); }
+        .timeline-container { position: relative; max-width: 400px; margin: 0 auto; z-index: 10; }
+        .timeline-line { position: absolute; top: 10px; bottom: 10px; left: 50%; width: 2px; background: linear-gradient(to bottom, transparent, var(--accent), transparent); transform: translateX(-50%); z-index: 1; }
+        .timeline-row { display: flex; width: 100%; margin-bottom: 3.8rem; position: relative; z-index: 2; align-items: center; }
+        .col-left, .col-right { width: 50%; display: flex; align-items: center; min-height: 60px; position: relative; z-index: 10; }
+        .timeline-row.alt-left .col-left { justify-content: flex-end; padding-right: 25px; text-align: right; }
+        .timeline-row.alt-left .col-right { visibility: hidden; }
+        .timeline-row.alt-right .col-right { justify-content: flex-start; padding-left: 25px; text-align: left; }
+        .timeline-row.alt-right .col-left { visibility: hidden; }
+        .dot-center { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); width: 14px; height: 14px; background-color: var(--accent); border-radius: 50%; border: 2px solid #fff; box-shadow: 0 0 10px var(--accent); z-index: 3; }
+        .time-text { font-family: var(--time-text); font-weight: 700; color: var(--accent); font-size: 1.05rem; display: block; margin-bottom: 4px; position: relative; z-index: 15;}
+        .desc-text { font-family: var(--script-text); font-size: 1.5rem; color: white; display: block; line-height: 1.1; position: relative; z-index: 15;}
+
+        /* --- BOTONES --- */
+        .action-buttons { padding: 2rem; display: flex; flex-direction: column; gap: 1.3rem; align-items: center; position: relative; z-index: 2;}
+        .btn { display: flex; align-items: center; justify-content: center; width: 100%; max-width: 340px; text-decoration: none; padding: 1.25rem; border-radius: 50px; font-weight: bold; font-size: 1.1rem; color: var(--white); text-transform: uppercase; transition: 0.3s; }
+        .btn-whatsapp { background-color: var(--whatsapp); box-shadow: 0 4px 15px rgba(37, 211, 102, 0.4); }
+        .btn-location { background-color: var(--secondary); box-shadow: 0 4px 15px rgba(4, 156, 216, 0.4); }
+
+        /* ==================== PERSONAJES Y ANIMACIONES ==================== */
+        .character-sprite { position: absolute; opacity: 0; z-index: 1; transition: opacity 0.8s ease, transform 0.8s cubic-bezier(0.34, 1.56, 0.64, 1); pointer-events: none; }
+        .character-sprite img { width: 100%; height: auto; display: block; filter: drop-shadow(0 5px 15px rgba(0,0,0,0.5)); animation: floating 3s ease-in-out infinite alternate; }
+        @keyframes floating { 0% { transform: translateY(0px); } 100% { transform: translateY(-12px); } }
+
+        .sprite-mario-giro { top: 30px; left: -160px; width: 100px; transform: rotate(-10deg); z-index: 1; }
+        .sprite-mario-giro.visible { opacity: 1; left: -10px; transform: rotate(0deg); }
+        
+        .sprite-mario-salto { bottom: -20px; right: -160px; width: 100px; z-index: 1; }
+        .sprite-mario-salto.visible { opacity: 1; right: -40px; } 
+        
+        .sprite-luigi { top: 150px; left: -160px; width: 90px; z-index: 1; }
+        .sprite-luigi.visible { opacity: 1; left: 15px; }
+        
+        .sprite-yoshi { bottom: 30px; right: -160px; width: 120px; transform: scaleX(-1); z-index: 1; }
+        .sprite-yoshi.visible { opacity: 1; right: 10px; }
+    </style>
+</head>
+<body>
+
+    <div id="scroll-progress"><div id="progress-bar"></div></div>
+    <div class="stars-container" id="stars-js"></div>
+    <div class="shooting-star" style="--interval: 8s; top: 10%; left: 80%;"></div>
+    <div class="shooting-star" style="--interval: 12s; top: 30%; left: 10%;"></div>
+
+    <div class="invitation-container">
+        <div class="hero-image reveal"></div>
+
+        <div class="message-section scroll-trigger">
+            <div class="character-sprite sprite-mario-giro"><img src="mario-giro.png" alt="" style="animation-delay: 0s;"></div>
+            <p class="message">"¡Hola! Te invito a mi fiesta. 🎂<br><br>No quiero que falte nadie de los que más quiero, ¡y por eso tienes que venir tú! Ven a ayudarme a soplar las velitas, ¡te espero con mucha emoción!"</p>
+            <p class="signature">- Atte: Mauricio</p>
+        </div>
+
+        <div class="bowser-date-wrapper reveal">
+            <div class="bowser-container">
+                <img src="bowser fecha.png" alt="Fecha Bowser" class="bowser-img">
+                <div class="bowser-text">
+                    <span class="fecha-title">Fecha:</span>
+                    <span class="fecha-date">Sábado 02 de Mayo</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="details-wrapper reveal">
+            <div class="details-card">
+                <div class="detail-row">
+                    <i class="fa-regular fa-clock detail-icon"></i>
+                    <div class="detail-content">
+                        <strong>Hora</strong>
+                        03:00 pm
+                    </div>
+                </div>
+                <div class="detail-row">
+                    <i class="fa-solid fa-location-dot detail-icon"></i>
+                    <div class="detail-content">
+                        <strong>Lugar</strong>
+                        Av. las torres 316 - Ate <br>Condominio residencial Prados del Sol
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="countdown-wrapper scroll-trigger">
+            <div class="character-sprite sprite-mario-salto"><img src="mario-salto.png" alt="" style="animation-delay: 0.5s;"></div>
+            <div class="countdown-title"><i class="fa-solid fa-star" style="color: var(--accent);"></i> Level Start In</div>
+            <div class="countdown" id="countdown">
+                <div class="time-box"><span id="days">00</span><small>Días</small></div>
+                <div class="time-box"><span id="hours">00</span><small>Hrs</small></div>
+                <div class="time-box"><span id="minutes">00</span><small>Min</small></div>
+                <div class="time-box"><span id="seconds">00</span><small>Seg</small></div>
+            </div>
+        </div>
+
+        <div class="itinerary-section scroll-trigger">
+             <div class="character-sprite sprite-luigi"><img src="luigi.png" alt="" style="animation-delay: 1s;"></div>
+             <div class="character-sprite sprite-yoshi"><img src="yoshi.png" alt="" style="animation-delay: 1.5s;"></div>
+             
+            <h2 class="itinerary-title reveal">Itinerario</h2>
+            <div class="timeline-container">
+                <div class="timeline-line"></div>
+                
+                <div class="timeline-row alt-left reveal">
+                    <div class="col-left">
+                        <span class="time-text">03:00 pm</span>
+                        <span class="desc-text">Empieza la fiesta</span>
+                    </div>
+                    <div class="dot-center"></div>
+                    <div class="col-right"></div>
+                </div>
+                
+                <div class="timeline-row alt-right reveal">
+                    <div class="col-left"></div>
+                    <div class="dot-center"></div>
+                    <div class="col-right">
+                        <span class="time-text">04:00 pm</span>
+                        <span class="desc-text">Caritas pintadas</span>
+                    </div>
+                </div>
+                
+                <div class="timeline-row alt-left reveal">
+                    <div class="col-left">
+                        <span class="time-text">05:00 pm</span>
+                        <span class="desc-text">Show infantil</span>
+                    </div>
+                    <div class="dot-center"></div>
+                    <div class="col-right"></div>
+                </div>
+                
+                <div class="timeline-row alt-right reveal">
+                    <div class="col-left"></div>
+                    <div class="dot-center"></div>
+                    <div class="col-right">
+                        <span class="time-text">05:30 pm</span>
+                        <span class="desc-text">Hora loca</span>
+                    </div>
+                </div>
+                
+                <div class="timeline-row alt-left reveal">
+                    <div class="col-left">
+                        <span class="time-text">06:00 pm</span>
+                        <span class="desc-text">Rompe la piñata</span>
+                    </div>
+                    <div class="dot-center"></div>
+                    <div class="col-right"></div>
+                </div>
+                
+                <div class="timeline-row alt-right reveal">
+                    <div class="col-left"></div>
+                    <div class="dot-center"></div>
+                    <div class="col-right">
+                        <span class="time-text">06:30 pm</span>
+                        <span class="desc-text">Feliz cumpleaños</span>
+                    </div>
+                </div>
+                
+                <div class="timeline-row alt-left reveal">
+                    <div class="col-left">
+                        <span class="time-text">07:00 pm</span>
+                        <span class="desc-text">Fin del evento</span>
+                    </div>
+                    <div class="dot-center"></div>
+                    <div class="col-right"></div>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="action-buttons reveal">
+            <a href="[https://wa.me/51986057910?text=](https://wa.me/51986057910?text=)¡Hola!%20Confirmo%20mi%20asistencia%20al%20cumpleaños%20de%20Mauricio%20🥳" target="_blank" class="btn btn-whatsapp">Confirmar Asistencia</a>
+            <a href="[https://www.google.com/maps/place/Condominio+Prados+del+Sol/@-12.0169662,-76.9007077,17z/data=!3m1!4b1!4m6!3m5!1s0x9105c3dd9f0ba7a5:0x34fc1e14a42c44d1!8m2!3d-12.0169662!4d-76.8981328!16s%2Fg%2F11h1l1dc0y?entry=ttu&g_ep=EgoyMDI2MDQyMi4wIKXMDSoASAFQAw%3D%3D](https://www.google.com/maps/place/Condominio+Prados+del+Sol/@-12.0169662,-76.9007077,17z/data=!3m1!4b1!4m6!3m5!1s0x9105c3dd9f0ba7a5:0x34fc1e14a42c44d1!8m2!3d-12.0169662!4d-76.8981328!16s%2Fg%2F11h1l1dc0y?entry=ttu&g_ep=EgoyMDI2MDQyMi4wIKXMDSoASAFQAw%3D%3D)" target="_blank" class="btn btn-location">Ver Ubicación</a>
         </div>
     </div>
 
