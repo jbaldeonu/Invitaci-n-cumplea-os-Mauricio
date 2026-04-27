@@ -40,65 +40,33 @@
             overflow-x: hidden;
         }
 
-        /* --- FONDO DE ESTRELLAS DESTELLANTES --- */
-        .stars-container {
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            z-index: 0;
-            pointer-events: none;
-        }
-
-        .star {
-            position: absolute;
-            background: white;
-            border-radius: 50%;
-            opacity: 0.3;
-            animation: twinkle var(--duration) infinite ease-in-out;
-        }
-
-        @keyframes twinkle {
-            0%, 100% { opacity: 0.2; transform: scale(0.8); }
-            50% { opacity: 1; transform: scale(1.2); }
-        }
+        /* --- FONDO DE ESTRELLAS --- */
+        .stars-container { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none; }
+        .star { position: absolute; background: white; border-radius: 50%; opacity: 0.3; animation: twinkle var(--duration) infinite ease-in-out; }
+        @keyframes twinkle { 0%, 100% { opacity: 0.2; transform: scale(0.8); } 50% { opacity: 1; transform: scale(1.2); } }
 
         /* --- ESTRELLAS FUGACES --- */
-        .shooting-star {
-            position: absolute;
-            top: 0; left: 50%;
-            width: 2px; height: 2px;
-            background: linear-gradient(90deg, white, transparent);
-            box-shadow: 0 0 10px white;
-            opacity: 0;
-            animation: shoot var(--interval) infinite linear;
-        }
-
-        @keyframes shoot {
-            0% { transform: translateX(0) translateY(0) rotate(-45deg) scale(0); opacity: 0; }
-            10% { opacity: 1; scale: 1; }
-            30% { transform: translateX(-500px) translateY(500px) rotate(-45deg) scale(1); opacity: 0; }
-            100% { opacity: 0; }
-        }
+        .shooting-star { position: absolute; top: 0; left: 50%; width: 2px; height: 2px; background: linear-gradient(90deg, white, transparent); box-shadow: 0 0 10px white; opacity: 0; animation: shoot var(--interval) infinite linear; }
+        @keyframes shoot { 0% { transform: translateX(0) translateY(0) rotate(-45deg) scale(0); opacity: 0; } 10% { opacity: 1; scale: 1; } 30% { transform: translateX(-500px) translateY(500px) rotate(-45deg) scale(1); opacity: 0; } 100% { opacity: 0; } }
 
         .invitation-container { max-width: 480px; width: 100%; background-color: transparent; min-height: 100vh; position: relative; z-index: 1; padding-bottom: 4rem; overflow: hidden; }
 
-        /* --- PORTADA COMPLETA --- */
+        /* --- PORTADA 100% PANTALLA --- */
         .hero-image { 
             width: 100%; 
-            height: 350px; 
+            height: 100vh; /* 100% del alto de la pantalla del celular */
             background-image: url('foto de portada.jpeg'); 
-            background-size: contain; 
+            background-size: 100% 100%; /* Estira la imagen para ocupar absolutamente toda la pantalla */
             background-position: center; 
             background-repeat: no-repeat;
-            background-color: var(--bg-galaxy-deep);
             border-bottom: 5px solid var(--accent); 
-            box-shadow: 0 10px 30px rgba(4, 156, 216, 0.3); 
         }
 
-        /* --- EFECTO DE DESVANECIMIENTO (SCROLL REVEAL) --- */
+        /* --- EFECTO REVEAL (MUESTRA Y OCULTA AL BAJAR/SUBIR) --- */
         .reveal {
             opacity: 0;
             transform: translateY(30px);
-            transition: all 1s ease-out;
+            transition: opacity 0.8s ease, transform 0.8s ease;
         }
         .reveal.visible {
             opacity: 1;
@@ -119,51 +87,56 @@
         .time-box span { font-family: var(--game-text); font-size: 1.2rem; color: #000; display: block; margin-bottom: 5px; }
         .time-box small { font-family: var(--time-text); font-size: 0.65rem; font-weight: 800; color: #000; text-transform: uppercase; }
 
+        /* --- ITINERARIO --- */
         .itinerary-section { padding: 3rem 1rem; text-align: center; position: relative; }
         .itinerary-title { font-family: var(--script-text); font-size: 3.2rem; margin-bottom: 4rem; text-shadow: 0 2px 10px rgba(255,255,255,0.3); }
-        
-        /* RESTAURADO A SU POSICIÓN ORIGINAL */
         .timeline-container { position: relative; max-width: 400px; margin: 0 auto; }
         .timeline-line { position: absolute; top: 10px; bottom: 10px; left: 50%; width: 2px; background: linear-gradient(to bottom, transparent, var(--accent), transparent); transform: translateX(-50%); z-index: 1; }
-        .timeline-row { display: flex; width: 100%; margin-bottom: 3.8rem; position: relative; z-index: 2; }
-        .col-left, .col-right { width: 50%; display: flex; align-items: center; }
-        .col-left { justify-content: flex-end; padding-right: 25px; }
-        .col-right { justify-content: flex-start; padding-left: 25px; }
-        .empty-col { visibility: hidden; } 
-        .timeline-row:last-child { margin-bottom: 1rem; }
         
-        .dot-center { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); width: 14px; height: 14px; background-color: var(--accent); border-radius: 50%; border: 2px solid #fff; box-shadow: 0 0 10px var(--accent); }
-        .time-text { font-family: var(--time-text); font-weight: 700; color: var(--accent); font-size: 1.05rem; }
-        .desc-text { font-family: var(--script-text); font-size: 1.5rem; }
+        .timeline-row { display: flex; width: 100%; margin-bottom: 3.8rem; position: relative; z-index: 2; align-items: center; }
+        .col-left, .col-right { width: 50%; display: flex; align-items: center; min-height: 60px; }
+        
+        /* Alineación alternada para mostrar siempre los textos */
+        .timeline-row.alt-left .col-left { justify-content: flex-end; padding-right: 25px; text-align: right; }
+        .timeline-row.alt-left .col-right { visibility: hidden; }
+        
+        .timeline-row.alt-right .col-right { justify-content: flex-start; padding-left: 25px; text-align: left; }
+        .timeline-row.alt-right .col-left { visibility: hidden; }
+
+        .dot-center { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); width: 14px; height: 14px; background-color: var(--accent); border-radius: 50%; border: 2px solid #fff; box-shadow: 0 0 10px var(--accent); z-index: 3; }
+        .time-text { font-family: var(--time-text); font-weight: 700; color: var(--accent); font-size: 1.05rem; display: block; margin-bottom: 2px; }
+        .desc-text { font-family: var(--script-text); font-size: 1.5rem; color: white; display: block; line-height: 1.1; }
 
         .action-buttons { padding: 2rem; display: flex; flex-direction: column; gap: 1.3rem; align-items: center; }
         .btn { display: flex; align-items: center; justify-content: center; width: 100%; max-width: 340px; text-decoration: none; padding: 1.25rem; border-radius: 50px; font-weight: bold; font-size: 1.1rem; color: var(--white); text-transform: uppercase; transition: 0.3s; }
         .btn-whatsapp { background-color: var(--whatsapp); box-shadow: 0 4px 15px rgba(37, 211, 102, 0.4); }
         .btn-location { background-color: var(--secondary); box-shadow: 0 4px 15px rgba(4, 156, 216, 0.4); }
 
-        /* --- POSICIONAMIENTO DE PERSONAJES --- */
-        .character-sprite { position: absolute; opacity: 0; z-index: 1; transition: all 1s cubic-bezier(0.34, 1.56, 0.64, 1); max-width: 150px; filter: drop-shadow(0 5px 15px rgba(0,0,0,0.5)); }
+        /* --- PERSONAJES (CON Z-INDEX ALTO) --- */
+        .character-sprite { 
+            position: absolute; 
+            opacity: 0; 
+            z-index: 10; 
+            transition: opacity 0.8s ease, transform 0.8s cubic-bezier(0.34, 1.56, 0.64, 1); 
+            max-width: 150px; 
+            pointer-events: none; 
+            filter: drop-shadow(0 5px 15px rgba(0,0,0,0.5)); 
+        }
         
-        .sprite-mario-giro { top: -20px; left: -160px; width: 140px; }
+        /* Mario Giro */
+        .sprite-mario-giro { top: 0; left: -160px; width: 140px; }
         .sprite-mario-giro.visible { opacity: 1; left: -10px; }
         
-        .sprite-mario-salto { bottom: -30px; right: -160px; width: 120px; }
+        /* Mario Salto */
+        .sprite-mario-salto { bottom: -20px; right: -160px; width: 120px; }
         .sprite-mario-salto.visible { opacity: 1; right: 10px; }
         
-        /* Luigi sobremontando el texto a la izquierda */
-        .sprite-luigi { 
-            top: 100px; /* A la altura del primer evento */
-            left: -160px; 
-            width: 130px; 
-            z-index: 10; /* Z-index alto para quedar por encima del texto */
-            pointer-events: none; /* Evita que Luigi bloquee la pantalla táctil */
-        }
-        .sprite-luigi.visible { 
-            opacity: 1; 
-            left: 5px; /* Ajustado para que se sobreponga al contenido izquierdo */
-        }
+        /* Luigi (Sobremontado a la izquierda del itinerario) */
+        .sprite-luigi { top: 80px; left: -160px; width: 130px; }
+        .sprite-luigi.visible { opacity: 1; left: 15px; }
         
-        .sprite-yoshi { bottom: 50px; right: -160px; width: 130px; transform: scaleX(-1); }
+        /* Yoshi */
+        .sprite-yoshi { bottom: 30px; right: -160px; width: 130px; transform: scaleX(-1); }
         .sprite-yoshi.visible { opacity: 1; right: 10px; }
     </style>
 </head>
@@ -174,7 +147,7 @@
     <div class="shooting-star" style="--interval: 12s; top: 30%; left: 10%;"></div>
 
     <div class="invitation-container">
-        <div class="hero-image"></div>
+        <div class="hero-image reveal"></div>
 
         <div class="message-section scroll-trigger reveal">
             <img src="mario-giro.png" alt="" class="character-sprite sprite-mario-giro">
@@ -209,13 +182,68 @@
             <div class="timeline-container">
                 <div class="timeline-line"></div>
                 
-                <div class="timeline-row reveal"><div class="col-left"><div class="text-wrapper"><div class="time-text">03:00 pm</div><div class="desc-text">Empieza la fiesta</div></div></div><div class="dot-center"></div><div class="col-right empty-col"></div></div>
-                <div class="timeline-row reveal"><div class="col-left empty-col"></div><div class="dot-center"></div><div class="col-right"><div class="text-wrapper"><div class="time-text">04:00 pm</div><div class="desc-text">CARITAS PINTADAS</div></div></div></div>
-                <div class="timeline-row reveal"><div class="col-left"><div class="text-wrapper"><div class="time-text">05:00 pm</div><div class="desc-text">SHOW INFANTIL</div></div></div><div class="dot-center"></div><div class="col-right empty-col"></div></div>
-                <div class="timeline-row reveal"><div class="col-left empty-col"></div><div class="dot-center"></div><div class="col-right"><div class="text-wrapper"><div class="time-text">05:30 pm</div><div class="desc-text">HORA LOCA</div></div></div></div>
-                <div class="timeline-row reveal"><div class="col-left"><div class="text-wrapper"><div class="time-text">06:00 pm</div><div class="desc-text">PIÑATA</div></div></div><div class="dot-center"></div><div class="col-right empty-col"></div></div>
-                <div class="timeline-row reveal"><div class="col-left empty-col"></div><div class="dot-center"></div><div class="col-right"><div class="text-wrapper"><div class="time-text">06:30 pm</div><div class="desc-text">CUMPLEAÑOS</div></div></div></div>
-                <div class="timeline-row reveal"><div class="col-left"><div class="text-wrapper"><div class="time-text">07:00 pm</div><div class="desc-text">FIN DEL EVENTO</div></div></div><div class="dot-center"></div><div class="col-right empty-col"></div></div>
+                <div class="timeline-row alt-left reveal">
+                    <div class="col-left">
+                        <span class="time-text">03:00 pm</span>
+                        <span class="desc-text">Empieza la fiesta</span>
+                    </div>
+                    <div class="dot-center"></div>
+                    <div class="col-right"></div>
+                </div>
+                
+                <div class="timeline-row alt-right reveal">
+                    <div class="col-left"></div>
+                    <div class="dot-center"></div>
+                    <div class="col-right">
+                        <span class="time-text">04:00 pm</span>
+                        <span class="desc-text">CARITAS PINTADAS</span>
+                    </div>
+                </div>
+                
+                <div class="timeline-row alt-left reveal">
+                    <div class="col-left">
+                        <span class="time-text">05:00 pm</span>
+                        <span class="desc-text">SHOW INFANTIL</span>
+                    </div>
+                    <div class="dot-center"></div>
+                    <div class="col-right"></div>
+                </div>
+                
+                <div class="timeline-row alt-right reveal">
+                    <div class="col-left"></div>
+                    <div class="dot-center"></div>
+                    <div class="col-right">
+                        <span class="time-text">05:30 pm</span>
+                        <span class="desc-text">HORA LOCA</span>
+                    </div>
+                </div>
+                
+                <div class="timeline-row alt-left reveal">
+                    <div class="col-left">
+                        <span class="time-text">06:00 pm</span>
+                        <span class="desc-text">PIÑATA</span>
+                    </div>
+                    <div class="dot-center"></div>
+                    <div class="col-right"></div>
+                </div>
+                
+                <div class="timeline-row alt-right reveal">
+                    <div class="col-left"></div>
+                    <div class="dot-center"></div>
+                    <div class="col-right">
+                        <span class="time-text">06:30 pm</span>
+                        <span class="desc-text">CUMPLEAÑOS</span>
+                    </div>
+                </div>
+                
+                <div class="timeline-row alt-left reveal">
+                    <div class="col-left">
+                        <span class="time-text">07:00 pm</span>
+                        <span class="desc-text">FIN DEL EVENTO</span>
+                    </div>
+                    <div class="dot-center"></div>
+                    <div class="col-right"></div>
+                </div>
 
             </div>
         </div>
@@ -227,6 +255,7 @@
     </div>
 
     <script>
+        // --- ESTRELLAS ---
         const starsContainer = document.getElementById('stars-js');
         for (let i = 0; i < 100; i++) {
             const star = document.createElement('div');
@@ -239,12 +268,13 @@
             starsContainer.appendChild(star);
         }
 
+        // --- CONTADOR ---
         const countDownDate = new Date("May 2, 2026 15:00:00").getTime();
         setInterval(() => {
             const now = new Date().getTime();
             const d = countDownDate - now;
             if (d < 0) {
-                document.getElementById("countdown").innerHTML = "<div style='font-family: \"Press Start 2P\", system-ui; font-size: 1rem; color: #FBD000; padding: 1.5rem 0; text-shadow: 0 0 10px rgba(251,208,0,0.7); line-height: 1.5;'>¡MISSION<br>START!</div>";
+                document.getElementById("countdown").innerHTML = "<div style='font-family: \"Press Start 2P\", system-ui; font-size: 1rem; color: #FBD000; padding: 1.5rem 0; text-shadow: 0 0 10px rgba(251,208,0,0.7); line-height: 1.5;'>¡LEVEL<br>START!</div>";
                 return;
             }
             document.getElementById("days").innerText = Math.floor(d / (1000 * 60 * 60 * 24)).toString().padStart(2, '0');
@@ -253,28 +283,24 @@
             document.getElementById("seconds").innerText = Math.floor((d % (1000 * 60)) / 1000).toString().padStart(2, '0');
         }, 1000);
 
-        const observerOptions = { threshold: 0.1, rootMargin: "0px 0px -50px 0px" };
+        // --- SCROLL REVEAL (MUESTRA Y OCULTA AL BAJAR/SUBIR) ---
+        const observerOptions = { threshold: 0.15 };
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
-                    if (entry.target.classList.contains('reveal')) {
-                        entry.target.classList.add('visible');
-                    }
-                    if (entry.target.classList.contains('scroll-trigger')) {
-                        const sprites = entry.target.querySelectorAll('.character-sprite');
-                        sprites.forEach(s => s.classList.add('visible'));
-                    }
-                    if (entry.target.classList.contains('itinerary-section')) {
-                        const rows = entry.target.querySelectorAll('.timeline-row.reveal');
-                        rows.forEach((row, index) => {
-                            setTimeout(() => row.classList.add('visible'), index * 200);
-                        });
-                    }
+                    entry.target.classList.add('visible');
+                    const sprites = entry.target.querySelectorAll('.character-sprite');
+                    sprites.forEach(s => s.classList.add('visible'));
+                } else {
+                    // Al salir de la pantalla, se quita la visibilidad
+                    entry.target.classList.remove('visible');
+                    const sprites = entry.target.querySelectorAll('.character-sprite');
+                    sprites.forEach(s => s.classList.remove('visible'));
                 }
             });
         }, observerOptions);
 
-        document.querySelectorAll('.reveal, .scroll-trigger, .itinerary-section').forEach(el => observer.observe(el));
+        document.querySelectorAll('.reveal, .scroll-trigger').forEach(el => observer.observe(el));
     </script>
 </body>
 </html>
