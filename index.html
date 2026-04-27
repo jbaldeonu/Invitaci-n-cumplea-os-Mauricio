@@ -40,7 +40,7 @@
             overflow-x: hidden;
         }
 
-        /* --- FONTO DE ESTRELLAS DESTELLANTES --- */
+        /* --- FONDO DE ESTRELLAS DESTELLANTES --- */
         .stars-container {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
@@ -84,14 +84,11 @@
         /* --- PORTADA COMPLETA --- */
         .hero-image { 
             width: 100%; 
-            height: 350px; /* Puedes ajustar esta altura si es necesario */
+            height: 350px; 
             background-image: url('foto de portada.jpeg'); 
-            /* Se cambia 'cover' por 'contain' para mostrar la imagen completa */
             background-size: contain; 
-            /* Centramos la imagen y evitamos que se repita */
             background-position: center; 
             background-repeat: no-repeat;
-            /* Agregamos un color de fondo azul oscuro para rellenar los bordes */
             background-color: var(--bg-galaxy-deep);
             border-bottom: 5px solid var(--accent); 
             box-shadow: 0 10px 30px rgba(4, 156, 216, 0.3); 
@@ -124,18 +121,16 @@
 
         .itinerary-section { padding: 3rem 1rem; text-align: center; position: relative; }
         .itinerary-title { font-family: var(--script-text); font-size: 3.2rem; margin-bottom: 4rem; text-shadow: 0 2px 10px rgba(255,255,255,0.3); }
-        .timeline-container { position: relative; max-width: 400px; margin: 0 auto; }
-        .timeline-line { position: absolute; top: 10px; bottom: 10px; left: 50%; width: 2px; background: linear-gradient(to bottom, transparent, var(--accent), transparent); transform: translateX(-50%); }
-        .timeline-row { display: flex; width: 100%; margin-bottom: 3.8rem; position: relative; z-index: 2; }
         
-        /* Ajustamos para alternar el contenido y dejar espacio para Luigi */
-        .timeline-row:nth-child(even) .col-left { justify-content: flex-end; padding-right: 25px; }
-        .timeline-row:nth-child(even) .col-right { justify-content: flex-start; padding-left: 25px; }
-        .timeline-row:nth-child(odd) .col-left { visibility: hidden; width: 50%; display: flex; align-items: center; justify-content: flex-end; padding-right: 25px; }
-        .timeline-row:nth-child(odd) .col-right { justify-content: flex-start; padding-left: 25px; }
-
-        .timeline-row:last-child { margin-bottom: 1rem; }
+        /* RESTAURADO A SU POSICIÓN ORIGINAL */
+        .timeline-container { position: relative; max-width: 400px; margin: 0 auto; }
+        .timeline-line { position: absolute; top: 10px; bottom: 10px; left: 50%; width: 2px; background: linear-gradient(to bottom, transparent, var(--accent), transparent); transform: translateX(-50%); z-index: 1; }
+        .timeline-row { display: flex; width: 100%; margin-bottom: 3.8rem; position: relative; z-index: 2; }
         .col-left, .col-right { width: 50%; display: flex; align-items: center; }
+        .col-left { justify-content: flex-end; padding-right: 25px; }
+        .col-right { justify-content: flex-start; padding-left: 25px; }
+        .empty-col { visibility: hidden; } 
+        .timeline-row:last-child { margin-bottom: 1rem; }
         
         .dot-center { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); width: 14px; height: 14px; background-color: var(--accent); border-radius: 50%; border: 2px solid #fff; box-shadow: 0 0 10px var(--accent); }
         .time-text { font-family: var(--time-text); font-weight: 700; color: var(--accent); font-size: 1.05rem; }
@@ -155,15 +150,17 @@
         .sprite-mario-salto { bottom: -30px; right: -160px; width: 120px; }
         .sprite-mario-salto.visible { opacity: 1; right: 10px; }
         
-        /* Luigi a la izquierda del primer evento del itinerario */
+        /* Luigi sobremontando el texto a la izquierda */
         .sprite-luigi { 
-            top: 120px; /* Ajustado para alinear con el primer evento */
+            top: 100px; /* A la altura del primer evento */
             left: -160px; 
-            width: 110px; 
+            width: 130px; 
+            z-index: 10; /* Z-index alto para quedar por encima del texto */
+            pointer-events: none; /* Evita que Luigi bloquee la pantalla táctil */
         }
         .sprite-luigi.visible { 
             opacity: 1; 
-            left: 10px; /* Posicionado dentro del contenedor a la izquierda */
+            left: 5px; /* Ajustado para que se sobreponga al contenido izquierdo */
         }
         
         .sprite-yoshi { bottom: 50px; right: -160px; width: 130px; transform: scaleX(-1); }
@@ -212,81 +209,13 @@
             <div class="timeline-container">
                 <div class="timeline-line"></div>
                 
-                <div class="timeline-row reveal">
-                    <div class="col-left"></div> <div class="dot-center"></div>
-                    <div class="col-right">
-                        <div class="text-wrapper">
-                            <div class="time-text">03:00 pm</div>
-                            <div class="desc-text">Empieza la fiesta</div>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="timeline-row reveal">
-                    <div class="col-left">
-                        <div class="text-wrapper">
-                            <div class="time-text">04:00 pm</div>
-                            <div class="desc-text">CARITAS PINTADAS</div>
-                        </div>
-                    </div>
-                    <div class="dot-center"></div>
-                    <div class="col-right"></div>
-                </div>
-                
-                <div class="timeline-row reveal">
-                    <div class="col-left"></div>
-                    <div class="dot-center"></div>
-                    <div class="col-right">
-                        <div class="text-wrapper">
-                            <div class="time-text">05:00 pm</div>
-                            <div class="desc-text">SHOW INFANTIL</div>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="timeline-row reveal">
-                    <div class="col-left">
-                        <div class="text-wrapper">
-                            <div class="time-text">05:30 pm</div>
-                            <div class="desc-text">HORA LOCA</div>
-                        </div>
-                    </div>
-                    <div class="dot-center"></div>
-                    <div class="col-right"></div>
-                </div>
-                
-                <div class="timeline-row reveal">
-                    <div class="col-left"></div>
-                    <div class="dot-center"></div>
-                    <div class="col-right">
-                        <div class="text-wrapper">
-                            <div class="time-text">06:00 pm</div>
-                            <div class="desc-text">PIÑATA</div>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="timeline-row reveal">
-                    <div class="col-left">
-                        <div class="text-wrapper">
-                            <div class="time-text">06:30 pm</div>
-                            <div class="desc-text">CUMPLEAÑOS</div>
-                        </div>
-                    </div>
-                    <div class="dot-center"></div>
-                    <div class="col-right"></div>
-                </div>
-                
-                <div class="timeline-row reveal">
-                    <div class="col-left"></div>
-                    <div class="dot-center"></div>
-                    <div class="col-right">
-                        <div class="text-wrapper">
-                            <div class="time-text">07:00 pm</div>
-                            <div class="desc-text">FIN DEL EVENTO</div>
-                        </div>
-                    </div>
-                </div>
+                <div class="timeline-row reveal"><div class="col-left"><div class="text-wrapper"><div class="time-text">03:00 pm</div><div class="desc-text">Empieza la fiesta</div></div></div><div class="dot-center"></div><div class="col-right empty-col"></div></div>
+                <div class="timeline-row reveal"><div class="col-left empty-col"></div><div class="dot-center"></div><div class="col-right"><div class="text-wrapper"><div class="time-text">04:00 pm</div><div class="desc-text">CARITAS PINTADAS</div></div></div></div>
+                <div class="timeline-row reveal"><div class="col-left"><div class="text-wrapper"><div class="time-text">05:00 pm</div><div class="desc-text">SHOW INFANTIL</div></div></div><div class="dot-center"></div><div class="col-right empty-col"></div></div>
+                <div class="timeline-row reveal"><div class="col-left empty-col"></div><div class="dot-center"></div><div class="col-right"><div class="text-wrapper"><div class="time-text">05:30 pm</div><div class="desc-text">HORA LOCA</div></div></div></div>
+                <div class="timeline-row reveal"><div class="col-left"><div class="text-wrapper"><div class="time-text">06:00 pm</div><div class="desc-text">PIÑATA</div></div></div><div class="dot-center"></div><div class="col-right empty-col"></div></div>
+                <div class="timeline-row reveal"><div class="col-left empty-col"></div><div class="dot-center"></div><div class="col-right"><div class="text-wrapper"><div class="time-text">06:30 pm</div><div class="desc-text">CUMPLEAÑOS</div></div></div></div>
+                <div class="timeline-row reveal"><div class="col-left"><div class="text-wrapper"><div class="time-text">07:00 pm</div><div class="desc-text">FIN DEL EVENTO</div></div></div><div class="dot-center"></div><div class="col-right empty-col"></div></div>
 
             </div>
         </div>
@@ -298,7 +227,6 @@
     </div>
 
     <script>
-        // --- ESTRELLAS GENERADAS ---
         const starsContainer = document.getElementById('stars-js');
         for (let i = 0; i < 100; i++) {
             const star = document.createElement('div');
@@ -311,7 +239,6 @@
             starsContainer.appendChild(star);
         }
 
-        // --- CONTADOR ---
         const countDownDate = new Date("May 2, 2026 15:00:00").getTime();
         setInterval(() => {
             const now = new Date().getTime();
@@ -326,27 +253,17 @@
             document.getElementById("seconds").innerText = Math.floor((d % (1000 * 60)) / 1000).toString().padStart(2, '0');
         }, 1000);
 
-        // --- SCROLL REVEAL Y ANIMACIÓN DE PERSONAJES ---
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: "0px 0px -50px 0px" // Para que se active un poco antes de llegar
-        };
-
+        const observerOptions = { threshold: 0.1, rootMargin: "0px 0px -50px 0px" };
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
-                    // Animación de desvanecimiento para textos y recuadros
                     if (entry.target.classList.contains('reveal')) {
                         entry.target.classList.add('visible');
                     }
-                    
-                    // Animación de deslizamiento para personajes
                     if (entry.target.classList.contains('scroll-trigger')) {
                         const sprites = entry.target.querySelectorAll('.character-sprite');
                         sprites.forEach(s => s.classList.add('visible'));
                     }
-                    
-                    // Aseguramos que el itinerario revele sus filas
                     if (entry.target.classList.contains('itinerary-section')) {
                         const rows = entry.target.querySelectorAll('.timeline-row.reveal');
                         rows.forEach((row, index) => {
