@@ -66,7 +66,7 @@
         .message { font-size: 1.2rem; line-height: 1.7; font-style: italic; text-shadow: 0 2px 4px rgba(0,0,0,0.5); position: relative; z-index: 2; }
         .signature { font-weight: bold; font-size: 1.4rem; color: var(--accent); margin-top: 10px; position: relative; z-index: 2; }
 
-        /* ==================== LETRERO BOWSER JR (NUEVO) ==================== */
+        /* ==================== LETRERO BOWSER JR ACTUALIZADO ==================== */
         .bowser-date-wrapper { 
             padding: 1rem; 
             display: flex; 
@@ -77,36 +77,39 @@
         .bowser-container {
             position: relative;
             width: 100%;
-            max-width: 400px; /* Tamaño ideal para móvil */
+            /* Imagen agrandada un poco más */
+            max-width: 450px; 
         }
         .bowser-img {
             width: 100%;
             height: auto;
             display: block;
-            filter: drop-shadow(0 15px 25px rgba(0,0,0,0.6)); /* Sombra para que resalte sobre el fondo */
+            filter: drop-shadow(0 15px 25px rgba(0,0,0,0.6));
         }
+        /* Texto encajado perfectamente en la pizarra */
         .bowser-text {
             position: absolute;
-            top: 46%;  /* Ajuste vertical sobre la pizarra en blanco */
-            left: 63%; /* Ajuste horizontal hacia la derecha de Bowser */
+            top: 46%;  /* Ajuste vertical preciso */
+            left: 63%; /* Ajuste horizontal preciso */
             transform: translate(-50%, -50%);
-            width: 55%;
+            width: 50%; /* Ocupa el ancho de la pizarra */
             text-align: center;
         }
         .fecha-title {
             display: block;
             font-family: var(--script-text);
-            font-size: 1.3rem;
-            color: #614013; /* Color oscuro para el subtítulo */
-            margin-bottom: 2px;
+            /* Tamaño ajustado para encajar */
+            font-size: 1.2rem; 
+            color: #614013;
+            margin-bottom: -2px;
         }
         .fecha-date {
             display: block;
             font-family: var(--script-text);
-            font-size: 1.7rem;
+            /* Tamaño ajustado para encajar */
+            font-size: 1.6rem; 
             font-weight: bold;
-            line-height: 1;
-            /* Efecto Dorado Escarcha */
+            line-height: 1.1;
             background: linear-gradient(to bottom right, #bf953f, #fcf6ba, #b38728, #fbf5b7, #aa771c);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
@@ -142,10 +145,10 @@
         .timeline-container { position: relative; max-width: 400px; margin: 0 auto; z-index: 10; }
         .timeline-line { position: absolute; top: 10px; bottom: 10px; left: 50%; width: 2px; background: linear-gradient(to bottom, transparent, var(--accent), transparent); transform: translateX(-50%); z-index: 1; }
         .timeline-row { display: flex; width: 100%; margin-bottom: 3.8rem; position: relative; z-index: 2; align-items: center; }
-        .col-left, .col-right { width: 50%; display: flex; flex-direction: column; min-height: 60px; position: relative; z-index: 10; }
-        .timeline-row.alt-left .col-left { align-items: flex-end; padding-right: 25px; text-align: right; }
+        .col-left, .col-right { width: 50%; display: flex; align-items: center; min-height: 60px; position: relative; z-index: 10; }
+        .timeline-row.alt-left .col-left { justify-content: flex-end; padding-right: 25px; text-align: right; }
         .timeline-row.alt-left .col-right { visibility: hidden; }
-        .timeline-row.alt-right .col-right { align-items: flex-start; padding-left: 25px; text-align: left; }
+        .timeline-row.alt-right .col-right { justify-content: flex-start; padding-left: 25px; text-align: left; }
         .timeline-row.alt-right .col-left { visibility: hidden; }
         .dot-center { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); width: 14px; height: 14px; background-color: var(--accent); border-radius: 50%; border: 2px solid #fff; box-shadow: 0 0 10px var(--accent); z-index: 3; }
         
@@ -350,7 +353,7 @@
             document.getElementById("seconds").innerText = Math.floor((d % (1000 * 60)) / 1000).toString().padStart(2, '0');
         }, 1000);
 
-        // --- SCROLL REVEAL ---
+        // --- SCROLL REVEAL (BIDIRECCIONAL) ---
         const observerOptions = { threshold: 0.15 };
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
