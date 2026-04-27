@@ -7,7 +7,8 @@
     <title>Invitación de Cumpleaños - Mauricio</title>
     <meta property="og:title" content="¡Estás Invitado! 🥳" />
     <meta property="og:description" content="Acompáñame a celebrar el cumpleaños de Mauricio. ¡Te espero con mucha emoción!" />
-    <meta property="og:image" content="AQUI_TU_ENLACE_COMPLETO/portada.jpeg" />
+    <meta property="og:image" content="https://jbaldeonu.github.io/Invitaci-n-cumplea-os-Mauricio/portada.jpeg" />
+    <meta property="og:url" content="https://jbaldeonu.github.io/Invitaci-n-cumplea-os-Mauricio/" />
     <meta property="og:type" content="website" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -62,7 +63,7 @@
 
         .invitation-container { max-width: 480px; width: 100%; background-color: transparent; min-height: 100vh; position: relative; z-index: 1; padding-bottom: 4rem; overflow: hidden; }
 
-        /* --- PORTADA (ACTUALIZADA) --- */
+        /* --- PORTADA --- */
         .hero-image { width: 100%; height: 100vh; background-image: url('portada.jpeg'); background-size: 100% 100%; background-position: center; background-repeat: no-repeat; border-bottom: 5px solid var(--accent); }
 
         /* --- EFECTO REVEAL --- */
@@ -306,7 +307,6 @@
     </div>
 
     <script>
-        // --- CONTROL DE MÚSICA DE FONDO ---
         const bgMusic = document.getElementById('bg-music');
         const musicBtn = document.getElementById('music-btn');
         const musicIcon = document.getElementById('music-icon');
@@ -323,32 +323,27 @@
             isMusicPlaying = !isMusicPlaying;
         }
 
-        // Reproducir o pausar al tocar el botón flotante
         musicBtn.addEventListener('click', function(e) {
-            e.stopPropagation(); // Evita que el click se propague al body
+            e.stopPropagation(); 
             toggleMusic();
         });
 
-        // Intentar reproducir al primer toque/clic en cualquier parte de la pantalla
         document.body.addEventListener('click', function() {
             if (!isMusicPlaying) { toggleMusic(); }
         }, { once: true });
         
-        // También intentar activar al hacer scroll
         window.addEventListener('scroll', function() {
             if (!isMusicPlaying) { toggleMusic(); }
         }, { once: true });
 
-
-        // --- BARRA DE PROGRESO ---
-        window.addEventListener('scroll', function() {
+        window.onscroll = function() { moveProgressBar() };
+        function moveProgressBar() {
             var winScroll = document.body.scrollTop || document.documentElement.scrollTop;
             var height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
             var scrolled = (winScroll / height) * 100;
             document.getElementById("progress-bar").style.width = scrolled + "%";
-        });
+        }
 
-        // --- ESTRELLAS ---
         const starsContainer = document.getElementById('stars-js');
         for (let i = 0; i < 70; i++) {
             const star = document.createElement('div');
@@ -361,7 +356,6 @@
             starsContainer.appendChild(star);
         }
 
-        // --- CONTADOR ---
         const countDownDate = new Date("May 2, 2026 15:00:00").getTime();
         setInterval(() => {
             const now = new Date().getTime();
@@ -376,7 +370,6 @@
             document.getElementById("seconds").innerText = Math.floor((d % (1000 * 60)) / 1000).toString().padStart(2, '0');
         }, 1000);
 
-        // --- SCROLL REVEAL (BIDIRECCIONAL) ---
         const observerOptions = { threshold: 0.15 };
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
