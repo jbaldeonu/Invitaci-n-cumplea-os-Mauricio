@@ -38,6 +38,25 @@
             min-height: 100vh;
             position: relative;
             overflow-x: hidden;
+            padding-top: 5px; /* Espacio para la barra de progreso */
+        }
+
+        /* ==================== BARRA DE CARGA AL SCROLL ==================== */
+        #scroll-progress {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: #000;
+            z-index: 999; /* Asegura que esté por encima de todo */
+        }
+        #progress-bar {
+            height: 100%;
+            background: var(--accent);
+            width: 0%;
+            transition: width 0.1s ease;
+            box-shadow: 0 0 10px var(--accent);
         }
 
         /* --- FONDO DE ESTRELLAS --- */
@@ -54,33 +73,38 @@
         /* --- PORTADA 100% PANTALLA --- */
         .hero-image { 
             width: 100%; 
-            height: 100vh; /* 100% del alto de la pantalla del celular */
+            height: 100vh; 
             background-image: url('foto de portada.jpeg'); 
-            background-size: 100% 100%; /* Estira la imagen para ocupar absolutamente toda la pantalla */
+            background-size: 100% 100%; 
             background-position: center; 
             background-repeat: no-repeat;
             border-bottom: 5px solid var(--accent); 
         }
 
-        /* --- EFECTO REVEAL (MUESTRA Y OCULTA AL BAJAR/SUBIR) --- */
+        /* --- EFECTO REVEAL (BIDIRECCIONAL) --- */
         .reveal {
             opacity: 0;
             transform: translateY(30px);
             transition: opacity 0.8s ease, transform 0.8s ease;
         }
+        /* Esta clase se añade/quita con JS según el scroll */
         .reveal.visible {
             opacity: 1;
             transform: translateY(0);
         }
 
+        /* --- MENSAJE --- */
         .message-section { padding: 3.5rem 2rem 2.5rem; text-align: center; position: relative; }
-        .message { font-size: 1.2rem; line-height: 1.7; font-style: italic; text-shadow: 0 2px 4px rgba(0,0,0,0.5); }
-        .signature { font-weight: bold; font-size: 1.4rem; color: var(--accent); margin-top: 10px; }
+        /* Las letras sobre la imagen */
+        .message { font-size: 1.2rem; line-height: 1.7; font-style: italic; text-shadow: 0 2px 4px rgba(0,0,0,0.5); position: relative; z-index: 2; }
+        .signature { font-weight: bold; font-size: 1.4rem; color: var(--accent); margin-top: 10px; position: relative; z-index: 2; }
 
+        /* --- TARJETA --- */
         .details-wrapper { padding: 1rem 2rem; position: relative; z-index: 2; }
         .details-card { background-color: rgba(255, 255, 255, 0.05); backdrop-filter: blur(5px); border-radius: 16px; padding: 2rem; border: 1px solid rgba(209, 213, 221, 0.3); box-shadow: 0 15px 35px rgba(0,0,0,0.3); }
         
-        .countdown-wrapper { background-color: rgba(0,0,0,0.7); padding: 2rem 1rem; margin: 2rem; text-align: center; border: 3px solid #fff; border-radius: 8px; box-shadow: 0 0 20px rgba(255,255,255,0.2); }
+        /* --- CONTADOR --- */
+        .countdown-wrapper { background-color: rgba(0,0,0,0.7); padding: 2rem 1rem; margin: 2rem; text-align: center; border: 3px solid #fff; border-radius: 8px; box-shadow: 0 0 20px rgba(255,255,255,0.2); position: relative; z-index: 2;}
         .countdown-title { font-family: var(--game-text); font-size: 0.8rem; margin-bottom: 1.8rem; text-transform: uppercase; text-shadow: 0 0 5px rgba(255,255,255,0.5); display: flex; align-items: center; justify-content: center; gap: 12px; }
         .countdown { display: flex; justify-content: center; gap: 0.8rem; flex-wrap: wrap; }
         .time-box { background-color: var(--accent); padding: 0.9rem 0.3rem; border-radius: 4px; min-width: 72px; border: 3px solid #000; box-shadow: inset -4px -4px 0px rgba(0, 0, 0, 0.15), 3px 3px 0px rgba(0,0,0,0.5); }
@@ -90,57 +114,68 @@
         /* --- ITINERARIO --- */
         .itinerary-section { padding: 3rem 1rem; text-align: center; position: relative; }
         .itinerary-title { font-family: var(--script-text); font-size: 3.2rem; margin-bottom: 4rem; text-shadow: 0 2px 10px rgba(255,255,255,0.3); }
-        .timeline-container { position: relative; max-width: 400px; margin: 0 auto; }
+        .timeline-container { position: relative; max-width: 400px; margin: 0 auto; z-index: 2; }
         .timeline-line { position: absolute; top: 10px; bottom: 10px; left: 50%; width: 2px; background: linear-gradient(to bottom, transparent, var(--accent), transparent); transform: translateX(-50%); z-index: 1; }
-        
         .timeline-row { display: flex; width: 100%; margin-bottom: 3.8rem; position: relative; z-index: 2; align-items: center; }
-        .col-left, .col-right { width: 50%; display: flex; align-items: center; min-height: 60px; }
-        
-        /* Alineación alternada para mostrar siempre los textos */
+        .col-left, .col-right { width: 50%; display: flex; align-items: center; min-height: 60px; position: relative; z-index: 5; }
         .timeline-row.alt-left .col-left { justify-content: flex-end; padding-right: 25px; text-align: right; }
         .timeline-row.alt-left .col-right { visibility: hidden; }
-        
         .timeline-row.alt-right .col-right { justify-content: flex-start; padding-left: 25px; text-align: left; }
         .timeline-row.alt-right .col-left { visibility: hidden; }
-
         .dot-center { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); width: 14px; height: 14px; background-color: var(--accent); border-radius: 50%; border: 2px solid #fff; box-shadow: 0 0 10px var(--accent); z-index: 3; }
         .time-text { font-family: var(--time-text); font-weight: 700; color: var(--accent); font-size: 1.05rem; display: block; margin-bottom: 2px; }
         .desc-text { font-family: var(--script-text); font-size: 1.5rem; color: white; display: block; line-height: 1.1; }
 
-        .action-buttons { padding: 2rem; display: flex; flex-direction: column; gap: 1.3rem; align-items: center; }
+        /* --- BOTONES --- */
+        .action-buttons { padding: 2rem; display: flex; flex-direction: column; gap: 1.3rem; align-items: center; position: relative; z-index: 2;}
         .btn { display: flex; align-items: center; justify-content: center; width: 100%; max-width: 340px; text-decoration: none; padding: 1.25rem; border-radius: 50px; font-weight: bold; font-size: 1.1rem; color: var(--white); text-transform: uppercase; transition: 0.3s; }
         .btn-whatsapp { background-color: var(--whatsapp); box-shadow: 0 4px 15px rgba(37, 211, 102, 0.4); }
         .btn-location { background-color: var(--secondary); box-shadow: 0 4px 15px rgba(4, 156, 216, 0.4); }
 
-        /* --- PERSONAJES (CON Z-INDEX ALTO) --- */
+        /* ==================== PERSONAJES ACTUALIZADOS ==================== */
         .character-sprite { 
             position: absolute; 
             opacity: 0; 
-            z-index: 10; 
+            z-index: 1; /* Por debajo de las letras (z-index 2) */
             transition: opacity 0.8s ease, transform 0.8s cubic-bezier(0.34, 1.56, 0.64, 1); 
-            max-width: 150px; 
-            pointer-events: none; 
+            height: auto; 
             filter: drop-shadow(0 5px 15px rgba(0,0,0,0.5)); 
         }
-        
-        /* Mario Giro */
-        .sprite-mario-giro { top: 0; left: -160px; width: 140px; }
+
+        /* Mario Giro: Más pequeño y más abajo */
+        .sprite-mario-giro { 
+            top: 10px; /* Bajado */
+            left: -160px; 
+            width: 110px; /* Más pequeño */
+        }
         .sprite-mario-giro.visible { opacity: 1; left: -10px; }
-        
-        /* Mario Salto */
-        .sprite-mario-salto { bottom: -20px; right: -160px; width: 120px; }
+
+        /* Mario Salto: Más pequeño y más abajo */
+        .sprite-mario-salto { 
+            bottom: -20px; /* Bajado */
+            right: -160px; 
+            width: 100px; /* Más pequeño */
+        }
         .sprite-mario-salto.visible { opacity: 1; right: 10px; }
-        
-        /* Luigi (Sobremontado a la izquierda del itinerario) */
-        .sprite-luigi { top: 80px; left: -160px; width: 130px; }
+
+        /* Luigi: Más pequeño, más abajo y DETRÁS del texto */
+        .sprite-luigi { 
+            top: 130px; /* Bajado */
+            left: -160px; 
+            width: 100px; /* Más pequeño */
+            z-index: 1; /* Asegura que esté por detrás */
+            pointer-events: none; /* No interfiere si tocan la pantalla */
+        }
         .sprite-luigi.visible { opacity: 1; left: 15px; }
-        
+
         /* Yoshi */
-        .sprite-yoshi { bottom: 30px; right: -160px; width: 130px; transform: scaleX(-1); }
+        .sprite-yoshi { bottom: 30px; right: -160px; width: 130px; transform: scaleX(-1); z-index: 1; }
         .sprite-yoshi.visible { opacity: 1; right: 10px; }
     </style>
 </head>
 <body>
+
+    <div id="scroll-progress"><div id="progress-bar"></div></div>
 
     <div class="stars-container" id="stars-js"></div>
     <div class="shooting-star" style="--interval: 8s; top: 10%; left: 80%;"></div>
@@ -149,7 +184,7 @@
     <div class="invitation-container">
         <div class="hero-image reveal"></div>
 
-        <div class="message-section scroll-trigger reveal">
+        <div class="message-section scroll-trigger">
             <img src="mario-giro.png" alt="" class="character-sprite sprite-mario-giro">
             <p class="message">"¡Hola! Te invito a mi fiesta. 🎂<br><br>No quiero que falte nadie de los que más quiero, ¡y por eso tienes que venir tú! Ven a ayudarme a soplar las velitas, ¡te espero con mucha emoción!"</p>
             <p class="signature">- Atte: Mauricio</p>
@@ -163,7 +198,7 @@
             </div>
         </div>
 
-        <div class="countdown-wrapper scroll-trigger reveal">
+        <div class="countdown-wrapper scroll-trigger">
             <img src="mario-salto.png" alt="" class="character-sprite sprite-mario-salto">
             <div class="countdown-title">Level Start In</div>
             <div class="countdown" id="countdown">
@@ -255,6 +290,15 @@
     </div>
 
     <script>
+        // --- BARRA DE PROGRESO ---
+        window.onscroll = function() { moveProgressBar() };
+        function moveProgressBar() {
+            var winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+            var height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            var scrolled = (winScroll / height) * 100;
+            document.getElementById("progress-bar").style.width = scrolled + "%";
+        }
+
         // --- ESTRELLAS ---
         const starsContainer = document.getElementById('stars-js');
         for (let i = 0; i < 100; i++) {
@@ -274,7 +318,7 @@
             const now = new Date().getTime();
             const d = countDownDate - now;
             if (d < 0) {
-                document.getElementById("countdown").innerHTML = "<div style='font-family: \"Press Start 2P\", system-ui; font-size: 1rem; color: #FBD000; padding: 1.5rem 0; text-shadow: 0 0 10px rgba(251,208,0,0.7); line-height: 1.5;'>¡LEVEL<br>START!</div>";
+                document.getElementById("countdown").innerHTML = "¡LEVEL START!";
                 return;
             }
             document.getElementById("days").innerText = Math.floor(d / (1000 * 60 * 60 * 24)).toString().padStart(2, '0');
@@ -283,16 +327,17 @@
             document.getElementById("seconds").innerText = Math.floor((d % (1000 * 60)) / 1000).toString().padStart(2, '0');
         }, 1000);
 
-        // --- SCROLL REVEAL (MUESTRA Y OCULTA AL BAJAR/SUBIR) ---
+        // --- SCROLL REVEAL (BIDIRECCIONAL) ---
         const observerOptions = { threshold: 0.15 };
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
+                    // Muestra al bajar
                     entry.target.classList.add('visible');
                     const sprites = entry.target.querySelectorAll('.character-sprite');
                     sprites.forEach(s => s.classList.add('visible'));
                 } else {
-                    // Al salir de la pantalla, se quita la visibilidad
+                    // Oculta al subir o salir
                     entry.target.classList.remove('visible');
                     const sprites = entry.target.querySelectorAll('.character-sprite');
                     sprites.forEach(s => s.classList.remove('visible'));
